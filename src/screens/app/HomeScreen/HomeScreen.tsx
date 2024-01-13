@@ -8,6 +8,7 @@ import {AppTabScreenProps} from '@routes';
 
 import {HomeHeader} from './components/HomeHeader';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function HomeScreen({navigation}: AppTabScreenProps<'HomeScreen'>) {
   const [postList, setPostList] = useState<Post[]>([]);
 
