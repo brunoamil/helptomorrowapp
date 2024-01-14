@@ -39,6 +39,7 @@ export function TextMessage({
         alignItems="center">
         <RNTextInput
           ref={inputRef}
+          value={value}
           placeholderTextColor={colors.gray2}
           style={[$textInputProps, {color: colors.gray1}]}
           {...rnTextInputProps}
