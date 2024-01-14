@@ -69,7 +69,7 @@ export function TextInput({
   );
 }
 
-const $textInputProps: TextStyle = {
+export const $textInputProps: TextStyle = {
   flexGrow: 1,
   flexShrink: 1,
   padding: 0,
