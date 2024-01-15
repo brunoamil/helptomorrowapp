@@ -1,21 +1,19 @@
-import {useState} from 'react';
+import {MutationOptions, useMutation} from '@infra';
 
 import {postCommentService} from '../postCommentService';
+import {PostComment} from '../postCommentTypes';
 
-export function usePostCommentCreate(postId: number) {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<boolean | null>(null);
+export function usePostCommentCreate(
+  postId: number,
+  options?: MutationOptions<PostComment>,
+) {
+  const {mutate, loading, error} = useMutation<{message: string}, PostComment>(
+    ({message}) => postCommentService.create(postId, message),
+    options,
+  );
 
   async function createComment(message: string) {
-    try {
-      setLoading(true);
-      setError(null);
-      await postCommentService.create(postId, message);
-    } catch (e) {
-      setError(true);
-    } finally {
-      setLoading(false);
-    }
+    await mutate({message});
   }
 
   return {

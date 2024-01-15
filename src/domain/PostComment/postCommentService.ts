@@ -28,7 +28,29 @@ async function create(post_id: number, message: string): Promise<PostComment> {
   return postCommentAdapter.toPostComment(postCommentAPI);
 }
 
+async function remove(postCommentId: number): Promise<string> {
+  const response = await postCommentApi.remove(postCommentId);
+  return response.message;
+}
+
+function isAllowToDelete(
+  postComment: PostComment,
+  userId: number,
+  postAuthorId: number,
+): boolean {
+  if (postComment.author.id === userId) {
+    return true;
+  }
+
+  if (postAuthorId === userId) {
+    return true;
+  }
+
+  return false;
+}
 export const postCommentService = {
   getList,
   create,
+  remove,
+  isAllowToDelete,
 };
