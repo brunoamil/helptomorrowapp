@@ -20,8 +20,8 @@ import {HomeHeader} from './components/HomeHeader';
 export function HomeScreen({navigation}: AppTabScreenProps<'HomeScreen'>) {
   const {
     list: PostList,
-    error,
-    loading,
+    isError,
+    isLoading,
     refresh,
     fetchNextPage,
   } = usePostList();
@@ -41,15 +41,15 @@ export function HomeScreen({navigation}: AppTabScreenProps<'HomeScreen'>) {
         renderItem={renderItem}
         onEndReached={fetchNextPage}
         onEndReachedThreshold={0.1}
-        refreshing={loading}
+        refreshing={isLoading}
         refreshControl={
-          <RefreshControl refreshing={loading} onRefresh={refresh} />
+          <RefreshControl refreshing={isLoading} onRefresh={refresh} />
         }
         // eslint-disable-next-line react-native/no-inline-styles
         contentContainerStyle={{flex: PostList.length === 0 ? 1 : undefined}}
         ListHeaderComponent={<HomeHeader />}
         ListEmptyComponent={
-          <HomeEmpty error={error} loading={loading} refetch={refresh} />
+          <HomeEmpty error={isError} loading={isLoading} refetch={refresh} />
         }
       />
     </Screen>
