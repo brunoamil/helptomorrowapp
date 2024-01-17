@@ -7,21 +7,20 @@ import {useToastService} from '@services';
 import {Box, ProfileAvatar, Text} from '@components';
 
 interface Props {
+  postId: number;
   postComment: PostComment;
-  onRemoveComment: () => void;
   postAuthorId: number;
   userId: number;
 }
 export function PostCommentItem({
+  postId,
   postComment,
-  onRemoveComment,
   postAuthorId,
   userId,
 }: Props) {
   const {showToast} = useToastService();
-  const {mutate} = usePostCommentRemove({
+  const {mutate} = usePostCommentRemove(postId, {
     onSucess: () => {
-      onRemoveComment();
       showToast({
         message: 'Comentário excluído com sucesso',
         position: 'bottom',
@@ -39,7 +38,7 @@ export function PostCommentItem({
       {
         text: 'Confirmar',
         onPress: () => {
-          mutate(postComment.id);
+          mutate({postCommentId: postComment.id});
         },
       },
       {

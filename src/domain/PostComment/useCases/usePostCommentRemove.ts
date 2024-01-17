@@ -1,10 +1,34 @@
-import {MutationOptions, useMutation} from '@infra';
+import {MutationOptions, QueryKeys} from '@infra';
+import {useMutation, useQueryClient} from 'react-query';
 
 import {postCommentService} from '../postCommentService';
 
-export function usePostCommentRemove(option?: MutationOptions<string>) {
-  return useMutation<number, string>(
-    postCommentId => postCommentService.remove(postCommentId),
-    option,
-  );
+export function usePostCommentRemove(
+  postId: number,
+  options?: MutationOptions<string>,
+) {
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation<string, unknown, {postCommentId: number}>({
+    mutationFn: ({postCommentId}) => postCommentService.remove(postCommentId),
+    onSuccess: message => {
+      queryClient.invalidateQueries({
+        queryKey: [QueryKeys.PostCommentList, postId],
+      });
+      if (options?.onSucess) {
+        options.onSucess(message);
+      }
+    },
+    onError: () => {
+      if (options?.onError) {
+        options.onError(
+          options.errorMessage || 'ocorreu um erro ao remover o comentário',
+        );
+      }
+    },
+  });
+
+  return {
+    mutate: mutation.mutate,
+  };
 }

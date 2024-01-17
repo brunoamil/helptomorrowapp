@@ -6,6 +6,10 @@ export interface MutationOptions<TData> {
   errorMessage?: string;
 }
 
+/**
+ * @description Mutation Legacy without ReactQuery
+ */
+
 export function useMutation<TVariables, TData>(
   mutationFn: (variables: TVariables) => Promise<TData>,
   options?: MutationOptions<TData>,
