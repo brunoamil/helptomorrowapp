@@ -15,8 +15,8 @@ export function usePostCommentRemove(
       queryClient.invalidateQueries({
         queryKey: [QueryKeys.PostCommentList, postId],
       });
-      if (options?.onSucess) {
-        options.onSucess(message);
+      if (options?.onSuccess) {
+        options.onSuccess(message);
       }
     },
     onError: () => {
