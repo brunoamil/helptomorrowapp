@@ -1,0 +1,37 @@
+import {api} from '@api';
+
+import {authAdapter} from './authAdapter';
+import {authApi} from './authApi';
+import {AuthCredentials} from './authTypes';
+
+async function signIn(
+  email: string,
+  password: string,
+): Promise<AuthCredentials> {
+  try {
+    const authCredentialsAPI = await authApi.signIn(email, password);
+    return authAdapter.toAuthCredentials(authCredentialsAPI);
+  } catch {
+    throw new Error('email ou senha inválida');
+  }
+}
+
+async function signOut(): Promise<string> {
+  const message = await authApi.signOut();
+  return message;
+}
+
+export function updateToken(token: string) {
+  api.defaults.headers.common.Authorization = `Bearer ${token}`;
+}
+
+export function removeToken() {
+  api.defaults.headers.common.Authorization = null;
+}
+
+export const authService = {
+  signIn,
+  signOut,
+  updateToken,
+  removeToken,
+};

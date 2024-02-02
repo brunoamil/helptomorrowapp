@@ -1,7 +1,7 @@
 import {useState} from 'react';
 
 export interface MutationOptions<TData> {
-  onSucess: (data: TData) => void;
+  onSuccess?: (data: TData) => void;
   onError?: (message: string) => void;
   errorMessage?: string;
 }
@@ -22,8 +22,8 @@ export function useMutation<TVariables, TData>(
       setLoading(true);
       setError(null);
       const data = await mutationFn(variables);
-      if (options?.onSucess) {
-        options.onSucess(data);
+      if (options?.onSuccess) {
+        options.onSuccess(data);
       }
     } catch (mutateError) {
       setError(true);

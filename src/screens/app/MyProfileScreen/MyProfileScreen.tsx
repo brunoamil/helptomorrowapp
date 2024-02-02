@@ -1,15 +1,25 @@
 import React from 'react';
 
-import {Screen, Text} from '@components';
+import {useAuthCredentials} from '@services';
+
+import {Box, Icon, Screen, Text} from '@components';
 import {AppTabScreenProps} from '@routes';
 
 export function MyProfileScreen({
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   navigation,
 }: AppTabScreenProps<'MyProfileScreen'>) {
+  const {authCredentials} = useAuthCredentials();
+  const name = authCredentials?.user.fullName;
+
   return (
     <Screen>
-      <Text preset="headingSmall">My Profile Screenn</Text>
+      <Box flexDirection="row" justifyContent="space-between">
+        {name && <Text preset="headingMedium">Ola {name}</Text>}
+        <Icon
+          name="settings"
+          onPress={() => navigation.navigate('SettingsScreen')}
+        />
+      </Box>
     </Screen>
   );
 }
