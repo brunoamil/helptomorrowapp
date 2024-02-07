@@ -1,22 +1,38 @@
 import React from 'react';
 
+import {useAuthRequestNewPassword} from '@domain';
 import {zodResolver} from '@hookform/resolvers/zod';
+import {useToastService} from '@services';
 import {useForm} from 'react-hook-form';
 
 import {Button, FormTextInput, Screen, Text} from '@components';
 import {useResetNavigationSuccess} from '@hooks';
-import {AuthScreenProps} from '@routes';
+import {AuthScreenProps, AuthStackParamList} from '@routes';
 
 import {
   ForgotPasswordSchema,
   forgotPasswordSchema,
 } from './forgotPasswordSchema';
 
-export function ForgotPasswordScreen({
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  navigation,
-}: AuthScreenProps<'ForgotPasswordScreen'>) {
+const resetParams: AuthStackParamList['SuccessScreen'] = {
+  title: `Enviamos as instruções ${'\n'}para seu  e-mail`,
+  description: 'Clique no link enviado no seu e-mail para recuperar sua senha',
+  icon: {
+    name: 'messageRound',
+    color: 'primary',
+  },
+};
+
+export function ForgotPasswordScreen({}: AuthScreenProps<'ForgotPasswordScreen'>) {
+  const {showToast} = useToastService();
   const {reset} = useResetNavigationSuccess();
+  const {requestNewPassword, isLoading} = useAuthRequestNewPassword({
+    onSuccess: () => reset(resetParams),
+    onError: message => {
+      showToast({message, type: 'error'});
+    },
+  });
+
   const {control, formState, handleSubmit} = useForm<ForgotPasswordSchema>({
     resolver: zodResolver(forgotPasswordSchema),
     defaultValues: {
@@ -25,17 +41,8 @@ export function ForgotPasswordScreen({
     mode: 'onChange',
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function submitForm(values: ForgotPasswordSchema) {
-    reset({
-      title: `Enviamos as instruções ${'\n'}para seu  e-mail`,
-      description:
-        'Clique no link enviado no seu e-mail para recuperar sua senha',
-      icon: {
-        name: 'messageRound',
-        color: 'primary',
-      },
-    });
+    requestNewPassword(values.email);
     // navigation.navigate('SuccessScreen', {
     //   title: `Enviamos as instruções ${'\n'}para seu  e-mail`,
     //   description:
@@ -64,6 +71,7 @@ export function ForgotPasswordScreen({
         boxProps={{mb: 's40'}}
       />
       <Button
+        loading={isLoading}
         onPress={handleSubmit(submitForm)}
         title="Recuperar senha"
         disabled={!formState.isValid}
