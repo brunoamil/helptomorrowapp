@@ -3,6 +3,8 @@ import {User, UserAPI} from '../User';
 export interface AuthCredentials {
   token: string;
   user: User;
+  refreshToken: string;
+  tokenExpiresAt: string;
 }
 
 export interface FieldIsAvailableAPI {
@@ -13,6 +15,8 @@ export interface AuthCredentialsAPI {
   auth: {
     type: string; // 'Bearer'
     token: string; // 'Token ----'
+    refreshToken: string;
+    expires_at: string;
   };
   user: UserAPI;
 }
