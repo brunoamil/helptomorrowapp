@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 
+import {useInfiniteQuery} from '@tanstack/react-query';
 import {Page} from '@types';
-import {useInfiniteQuery} from 'react-query';
 
 export interface usePaginatedListRQResult<TData> {
   list: TData[];

@@ -1,5 +1,5 @@
 import {QueryKeys} from '@infra';
-import {useQuery} from 'react-query';
+import {useQuery} from '@tanstack/react-query';
 
 import {userService} from '../userService';
 

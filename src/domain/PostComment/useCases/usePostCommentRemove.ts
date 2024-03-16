@@ -1,5 +1,5 @@
 import {MutationOptions, QueryKeys} from '@infra';
-import {useMutation, useQueryClient} from 'react-query';
+import {useMutation, useQueryClient} from '@tanstack/react-query';
 
 import {postCommentService} from '../postCommentService';
 
