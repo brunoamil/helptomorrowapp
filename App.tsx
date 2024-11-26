@@ -4,6 +4,7 @@ import {Text} from './src/components/Text/Text';
 import {Button} from './src/components/Button/Button';
 import {ThemeProvider} from '@shopify/restyle';
 import {theme} from './src/theme/theme';
+import {Icon} from './src/components/Icon/Icon';
 
 function App(): React.JSX.Element {
   return (
@@ -27,7 +28,8 @@ function App(): React.JSX.Element {
             marginBottom="s12"
             disabled
           />
-
+          <Icon name="eyeOff" color="backgroundContrast" size={50} />
+          <Button preset="primary" title="Loading" loading marginBottom="s12" />
           <Button title="Loading" loading />
         </View>
       </SafeAreaView>
