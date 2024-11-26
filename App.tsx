@@ -1,9 +1,10 @@
 import React from 'react';
 import {SafeAreaView, View} from 'react-native';
-import {Text} from './src/components/Text/Text';
-import {Button} from './src/components/Button/Button';
 import {ThemeProvider} from '@shopify/restyle';
 import {theme} from './src/theme/theme';
+import {Text} from './src/components/Text/Text';
+import {Button} from './src/components/Button/Button';
+import {TextInput} from './src/components/TextInput/TextInput';
 import {Icon} from './src/components/Icon/Icon';
 
 function App(): React.JSX.Element {
@@ -11,26 +12,29 @@ function App(): React.JSX.Element {
     <ThemeProvider theme={theme}>
       <SafeAreaView>
         <View style={{paddingHorizontal: 24}}>
-          <Text preset="headingLarge" italic>
-            HelpTomorrow
+          <Text mb="s8" preset="headingLarge">
+            Olá!
           </Text>
-          <Button preset="primary" title="Primary" marginBottom="s12" />
-          <Button
-            preset="primary"
-            title="Primary"
-            marginBottom="s12"
-            disabled
+          <Text preset="paragraphLarge" mb="s40">
+            Digite seu e-mail e senha para entrar
+          </Text>
+          <TextInput
+            errorMessage="E-mail inválido"
+            label="E-mail"
+            placeholder="Digite seu e-mail"
+            boxProps={{mb: 's20'}}
           />
-          <Button preset="outline" title="Outline" marginBottom="s12" />
-          <Button
-            preset="outline"
-            title="Outline"
-            marginBottom="s12"
-            disabled
+          <TextInput
+            RightComponent={<Icon name="eyeOn" color="gray2" />}
+            label="Senha"
+            placeholder="Digite sua senha"
+            boxProps={{mb: 's10'}}
           />
-          <Icon name="eyeOff" color="backgroundContrast" size={50} />
-          <Button preset="primary" title="Loading" loading marginBottom="s12" />
-          <Button title="Loading" loading />
+          <Text mt="s10" color="primary" preset="paragraphSmall" bold>
+            Esqueci minha senha
+          </Text>
+          <Button title="Entrar" mt="s48" />
+          <Button title="Criar uma conta" mt="s10" preset="outline" />
         </View>
       </SafeAreaView>
     </ThemeProvider>
