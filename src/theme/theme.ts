@@ -51,6 +51,10 @@ export const theme = createTheme({
   },
   breakpoints: {},
   zIndices: {},
+  textVariants: {
+    defaults: {},
+  },
 });
 
 export type Theme = typeof theme;
+export type ThemeColors = keyof Theme['colors'];
