@@ -5,8 +5,12 @@ import {TextInput} from '../../../components/TextInput/TextInput';
 import {Icon} from '../../../components/Icon/Icon';
 import {Button} from '../../../components/Button/Button';
 import {PasswordInput} from '../../../components/PasswordInput/PasswordInput';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../../../routes/Routes';
 
-export function SignUpScreen() {
+type ScreenProps = NativeStackScreenProps<RootStackParamList, 'SignUpScreen'>;
+
+export function SignUpScreen(props: ScreenProps) {
   function submitForm() {}
   return (
     <Screen canGoBack scrollable>
