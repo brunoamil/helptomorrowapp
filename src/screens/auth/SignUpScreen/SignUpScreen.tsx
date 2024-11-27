@@ -18,6 +18,7 @@ import {SignUpSchema, signUpSchema} from './signUpSchema';
 
 type ScreenProps = NativeStackScreenProps<RootStackParamList, 'SignUpScreen'>;
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function SignUpScreen({navigation}: ScreenProps) {
   const {reset} = useResetNavigationSuccess();
   const {control, formState, handleSubmit} = useForm<SignUpSchema>({
@@ -30,6 +31,7 @@ export function SignUpScreen({navigation}: ScreenProps) {
     },
     mode: 'onChange',
   });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function submitForm(formValues: SignUpSchema) {
     reset({
       title: 'Sua conta foi criada com sucesso!',
