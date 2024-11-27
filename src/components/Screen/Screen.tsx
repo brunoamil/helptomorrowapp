@@ -18,14 +18,14 @@ export function Screen({
   canGoBack = false,
   scrollable = false,
 }: ScreenProps) {
-  const {colors} = useAppTheme();
+  const {colors, spacing} = useAppTheme();
   const {top, bottom} = useAppSafeArea();
   const navigation = useNavigation();
 
   const Container = scrollable ? ScrollViewContainer : ViewContainer;
   return (
     <KeyboardAvoidingView
-      style={{flex: 1}}
+      style={{flex: 1, marginTop: spacing.s8}}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <Container backgroundColor={colors.background}>
         <Box
