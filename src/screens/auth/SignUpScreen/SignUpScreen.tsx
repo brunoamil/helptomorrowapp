@@ -7,44 +7,124 @@ import {PasswordInput} from '../../../components/PasswordInput/PasswordInput';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../../routes/Routes';
 import {useResetNavigationSuccess} from '../../../hooks/useResetNavigationSuccess';
+import {Controller, useForm} from 'react-hook-form';
 
+type SignUpFormType = {
+  username: string;
+  fullName: string;
+  email: string;
+  password: string;
+};
 type ScreenProps = NativeStackScreenProps<RootStackParamList, 'SignUpScreen'>;
 
 export function SignUpScreen({navigation}: ScreenProps) {
   const {reset} = useResetNavigationSuccess();
-  function submitForm() {
-    reset({
-      title: 'Sua conta foi criada com sucesso!',
-      description: 'Agora é só fazer login na nossa plataforma',
-      icon: {
-        name: 'checkRound',
-        color: 'success',
-      },
-    });
+  const {control, formState, handleSubmit} = useForm<SignUpFormType>({
+    defaultValues: {
+      username: '',
+      fullName: '',
+      email: '',
+      password: '',
+    },
+    mode: 'onChange',
+  });
+  function submitForm(formValues: SignUpFormType) {
+    console.log('formValues', formValues);
+    // reset({
+    //   title: 'Sua conta foi criada com sucesso!',
+    //   description: 'Agora é só fazer login na nossa plataforma',
+    //   icon: {
+    //     name: 'checkRound',
+    //     color: 'success',
+    //   },
+    // });
   }
   return (
     <Screen canGoBack scrollable>
       <Text preset="headingLarge" mb="s32">
         Criar uma conta
       </Text>
-      <TextInput boxProps={{mb: 's20'}} label="Seu username" placeholder="@" />
-      <TextInput
-        boxProps={{mb: 's20'}}
-        label="Nome completo"
-        placeholder="Digite seu nome completo"
-      />
-      <TextInput
-        boxProps={{mb: 's20'}}
-        label="E-mail"
-        placeholder="Digite seu e-mail"
+      <Controller
+        control={control}
+        name="username"
+        rules={{required: 'Campo obrigatório'}}
+        render={({field, fieldState}) => (
+          <TextInput
+            value={field.value}
+            onChangeText={field.onChange}
+            errorMessage={fieldState.error?.message}
+            boxProps={{mb: 's20'}}
+            label="Seu username"
+            placeholder="@"
+          />
+        )}
       />
 
-      <PasswordInput
-        label="Nova senha"
-        placeholder="Digite sua nova senha"
-        boxProps={{mb: 's48'}}
+      <Controller
+        control={control}
+        name="fullName"
+        rules={{required: 'Nome obrigatório'}}
+        render={({field, fieldState}) => (
+          <TextInput
+            value={field.value}
+            onChangeText={field.onChange}
+            errorMessage={fieldState.error?.message}
+            boxProps={{mb: 's20'}}
+            label="Nome completo"
+            placeholder="Digite seu nome completo"
+          />
+        )}
       />
-      <Button title="Criar uma conta" onPress={submitForm} />
+
+      <Controller
+        control={control}
+        name="email"
+        rules={{
+          required: 'E-mail é obrigatório',
+          pattern: {
+            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+            message: 'E-mail inválido',
+          },
+        }}
+        render={({field, fieldState}) => (
+          <TextInput
+            value={field.value}
+            errorMessage={fieldState.error?.message}
+            onChangeText={field.onChange}
+            label="E-mail"
+            placeholder="Digite seu e-mail"
+            boxProps={{mb: 's20'}}
+          />
+        )}
+      />
+
+      <Controller
+        control={control}
+        name="password"
+        rules={{
+          required: 'Senha é obrigatória',
+          minLength: {
+            value: 3,
+            message: 'Senha precisa ter pelo menos 3 caracteres',
+          },
+        }}
+        render={({field, fieldState}) => (
+          <PasswordInput
+            value={field.value}
+            errorMessage={fieldState.error?.message}
+            onChangeText={field.onChange}
+            label="Senha"
+            placeholder="Digite sua senha"
+            boxProps={{mb: 's48'}}
+          />
+        )}
+      />
+
+      <Button
+        disabled={!formState.isValid}
+        title="Criar uma conta"
+        onPress={handleSubmit(submitForm)}
+      />
     </Screen>
   );
 }
