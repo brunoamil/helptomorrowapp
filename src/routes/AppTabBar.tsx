@@ -20,10 +20,7 @@ import {mapScreenToProps} from './mapScreenToProps';
 export function AppTabBar({state, descriptors, navigation}: BottomTabBarProps) {
   const {bottom} = useAppSafeArea();
   return (
-    <Box
-      {...$boxWrapper}
-      style={[{paddingBottom: bottom}, $shadowProps]}
-      backgroundColor="carrotSecondary">
+    <Box {...$boxWrapper} style={[{paddingBottom: bottom}, $shadowProps]}>
       {state.routes.map((route, index) => {
         const {options} = descriptors[route.key];
         const tabItem =
