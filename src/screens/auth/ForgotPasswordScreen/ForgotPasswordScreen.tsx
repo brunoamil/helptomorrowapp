@@ -25,8 +25,8 @@ export function ForgotPasswordScreen({
     },
     mode: 'onChange',
   });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function submitForm(values: ForgotPasswordSchema) {
-    console.log('values', values);
     reset({
       title: `Enviamos as instruções ${'\n'}para seu e-mail`,
       description:

@@ -14,7 +14,6 @@ export function HomeScreen({navigation}: AppTabScreenProps<'HomeScreen'>) {
 
   useEffect(() => {
     postService.getList().then(list => {
-      console.log(list);
       setPostList(list);
     });
   }, []);
