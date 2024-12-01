@@ -12,7 +12,7 @@ import {Text} from '../Text/Text';
 import {$textInputStyle} from '../TextInput/TextInput';
 
 interface TextMessageProps extends RNTextInputProps {
-  onPressSend: () => void;
+  onPressSend: (message: string) => void;
 }
 export function TextMessage({
   onPressSend,
@@ -35,16 +35,17 @@ export function TextMessage({
         flexDirection="row"
         justifyContent="space-between"
         alignItems="center"
-        borderRadius="s12"
-        style={[$textInputStyle, {color: colors.gray1}]}>
+        borderRadius="s12">
         <RNTextInput
           ref={inputRef}
           value={value}
           placeholderTextColor={colors.gray2}
-          placeholder="Adicione um comentário"
+          style={[$textInputStyle, {color: colors.gray1}]}
           {...rnTextInputProps}
         />
-        <Pressable disabled={sendIsDisable} onPress={onPressSend}>
+        <Pressable
+          disabled={sendIsDisable}
+          onPress={() => onPressSend(value || '')}>
           <Text color={sendIsDisable ? 'gray2' : 'primary'} bold>
             Enviar
           </Text>
