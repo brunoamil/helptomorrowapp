@@ -1,5 +1,5 @@
 export type ToastPosition = 'top' | 'bottom';
-export type ToastType = 'success' | 'warning';
+export type ToastType = 'success' | 'error';
 export interface Toast {
   message: string;
   type?: ToastType;
@@ -12,7 +12,7 @@ export interface Toast {
 }
 
 export interface ToastService {
-  toast?: Toast | null;
+  toast: Toast | null;
   showToast: (toast: Toast) => void;
   hideToast: () => void;
 }
