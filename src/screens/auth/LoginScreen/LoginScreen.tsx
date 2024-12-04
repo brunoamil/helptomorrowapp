@@ -1,7 +1,9 @@
 import React from 'react';
 import {Alert} from 'react-native';
 
+import {useAuthSignIn} from '@domain';
 import {zodResolver} from '@hookform/resolvers/zod';
+import {useToastService} from '@services';
 import {useForm} from 'react-hook-form';
 
 import {
@@ -16,6 +18,11 @@ import {AuthScreenProps} from '@routes';
 import {LoginSchema, loginSchema} from './loginSchema';
 
 export function LoginScreen({navigation}: AuthScreenProps<'LoginScreen'>) {
+  const {showToast} = useToastService();
+  const {signIn, isLoading} = useAuthSignIn({
+    onError: message => showToast({message, type: 'error'}),
+  });
+
   const {control, formState, handleSubmit} = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -34,6 +41,7 @@ export function LoginScreen({navigation}: AuthScreenProps<'LoginScreen'>) {
   }
 
   function submitForm({email, password}: LoginSchema) {
+    signIn({email, password});
     Alert.alert('Login', `Email: ${email} Senha: ${password}`);
   }
   return (
@@ -74,6 +82,7 @@ export function LoginScreen({navigation}: AuthScreenProps<'LoginScreen'>) {
         disabled={!formState.isValid}
       />
       <Button
+        loading={isLoading}
         onPress={navigateToSignUpScreen}
         title="Criar uma conta"
         mt="s10"
