@@ -5,6 +5,10 @@ export interface MutationOptions<TData> {
   onError?: (message: string) => void;
   errorMessage?: string;
 }
+/**
+ *
+ * @deprecated Use mutation TanStak
+ */
 export function useMutation<TVariables, TData>(
   mutationFn: (variables: TVariables) => Promise<TData>,
   options?: MutationOptions<TData>,
@@ -31,3 +35,9 @@ export function useMutation<TVariables, TData>(
   }
   return {mutate, loading, error};
 }
+
+/** Exemplo User */
+// const {mutate, error, loading} = useMutation<{message: string}, PostComment>(
+//   ({message}) => postCommentService.create(postId, message),
+//   options,
+// );
