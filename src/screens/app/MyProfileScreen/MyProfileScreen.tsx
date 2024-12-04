@@ -8,8 +8,8 @@ export function MyProfileScreen({
   navigation,
 }: AppTabScreenProps<'MyProfileScreen'>) {
   return (
-    <Screen>
-      <Text preset="headingSmall">My Profile Screen</Text>
+    <Screen canGoBack>
+      <Text>MyProfileScreen</Text>
     </Screen>
   );
 }

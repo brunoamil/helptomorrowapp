@@ -8,8 +8,8 @@ import {
 import {
   FavoriteScreen,
   HomeScreen,
-  MyProfileScreen,
   NewPostScreen,
+  MyProfileScreen,
 } from '@screens';
 
 import {AppTabBar} from './AppTabBar';

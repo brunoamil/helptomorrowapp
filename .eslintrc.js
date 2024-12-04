@@ -1,7 +1,7 @@
 module.exports = {
   root: true,
-  extends: '@react-native',
-  plugins: ['import'],
+  extends: ['@react-native', 'plugin:@tanstack/query/recommended'],
+  plugins: ['import', '@tanstack/query'],
   overrides: [
     {
       files: ['*.ts', '*.tsx'],
