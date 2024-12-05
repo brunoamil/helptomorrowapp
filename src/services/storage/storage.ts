@@ -8,3 +8,7 @@ export interface Storage {
 }
 
 export let storage: Storage = MMVKStorage;
+
+export function initializeStorage(storageImpl: Storage) {
+  storage = storageImpl;
+}
