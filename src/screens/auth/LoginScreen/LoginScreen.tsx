@@ -1,5 +1,4 @@
 import React from 'react';
-import {Alert} from 'react-native';
 
 import {useAuthSignIn} from '@domain';
 import {zodResolver} from '@hookform/resolvers/zod';
@@ -42,7 +41,6 @@ export function LoginScreen({navigation}: AuthScreenProps<'LoginScreen'>) {
 
   function submitForm({email, password}: LoginSchema) {
     signIn({email, password});
-    Alert.alert('Login', `Email: ${email} Senha: ${password}`);
   }
   return (
     <Screen>
