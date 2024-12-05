@@ -76,11 +76,11 @@ export function LoginScreen({navigation}: AuthScreenProps<'LoginScreen'>) {
       <Button
         title="Entrar"
         mt="s48"
+        loading={isLoading}
         onPress={handleSubmit(submitForm)}
         disabled={!formState.isValid}
       />
       <Button
-        loading={isLoading}
         onPress={navigateToSignUpScreen}
         title="Criar uma conta"
         mt="s10"
