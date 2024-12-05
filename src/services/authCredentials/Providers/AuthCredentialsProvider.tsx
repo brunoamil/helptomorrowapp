@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {createContext, useState} from 'react';
 
-import {AuthCredentials} from '@domain';
+import {AuthCredentials, authService} from '@domain';
 
+import {authCredentialsStorage} from '../authCredentialsStorage';
 import {AuthCredentialsService} from '../authCredentialsTypes';
 
 export const AuthCredentialsContext = createContext<AuthCredentialsService>({
@@ -15,14 +16,35 @@ export const AuthCredentialsContext = createContext<AuthCredentialsService>({
 export function AuthCredentialsProvider({children}: React.PropsWithChildren) {
   const [authCredentials, setAuthCredentials] =
     useState<AuthCredentials | null>(null);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   const [isLoading, setLoading] = useState(true);
 
+  useEffect(() => {
+    startAuthCredentials();
+  }, []);
+
+  async function startAuthCredentials() {
+    try {
+      await new Promise(resolve => setTimeout(resolve, 1000, ''));
+      const ac = await authCredentialsStorage.get();
+      if (ac) {
+        authService.updateToken(ac.token);
+        setAuthCredentials(ac);
+      }
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
+  }
   async function saveCredentials(ac: AuthCredentials): Promise<void> {
+    authService.updateToken(ac.token);
+    authCredentialsStorage.set(ac);
     setAuthCredentials(ac);
   }
 
   async function removeCredentials(): Promise<void> {
+    authService.removeToken();
+    authCredentialsStorage.remove();
     setAuthCredentials(null);
   }
   return (
