@@ -2,6 +2,7 @@ import {api} from '@api';
 
 import {authAdapter} from './authAdapter';
 import {authApi} from './authApi';
+import {SignUpData} from './authTypes';
 
 async function signIn(email: string, password: string) {
   try {
@@ -17,6 +18,9 @@ async function signOut(): Promise<string> {
   return message;
 }
 
+async function signUp(signUpData: SignUpData): Promise<void> {
+  await authApi.signUp(signUpData);
+}
 function updateToken(token: string) {
   return (api.defaults.headers.common.Authorization = `Bearer ${token}`);
 }
@@ -27,6 +31,7 @@ function removeToken() {
 export const authService = {
   signIn,
   signOut,
+  signUp,
   updateToken,
   removeToken,
 };
