@@ -7,19 +7,23 @@ import {authService} from '../authService';
 
 interface Param {
   username: string;
+  enabled: boolean;
 }
-export function useAuthIsUsernameIsAvailable({username}: Param) {
-  const debounceUserName = useDebounce(username, 5000);
+export function useAuthIsUsernameIsAvailable({username, enabled}: Param) {
+  const debounceUserName = useDebounce(username, 1500);
 
   const {data, isFetching} = useQuery({
     queryKey: [QueryKeys.IsUserNameAvailable, debounceUserName],
     queryFn: () => authService.isUserNameAvailable(debounceUserName),
     retry: false,
-    staleTime: 20000,
+    staleTime: 200,
+    enabled: enabled && debounceUserName.length > 0,
   });
+
+  const isDebouncing = debounceUserName !== username;
 
   return {
     isAvailable: !!data,
-    isFetching,
+    isFetching: isFetching || isDebouncing,
   };
 }
