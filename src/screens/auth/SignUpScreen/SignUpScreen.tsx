@@ -69,6 +69,11 @@ export function SignUpScreen({navigation}: AuthScreenProps<'SignUpScreen'>) {
         control={control}
         name="username"
         label="Seu username"
+        errorMessage={
+          usernameQuery.isUnavailable
+            ? 'Username não está disponivel'
+            : undefined
+        }
         placeholder="@"
         boxProps={{mb: 's20'}}
         RightComponent={
@@ -112,7 +117,11 @@ export function SignUpScreen({navigation}: AuthScreenProps<'SignUpScreen'>) {
 
       <Button
         loading={isLoading}
-        disabled={!formState.isValid || usernameQuery.isFetching}
+        disabled={
+          !formState.isValid ||
+          usernameQuery.isFetching ||
+          usernameQuery.isUnavailable
+        }
         title="Criar uma conta"
         onPress={handleSubmit(submitForm)}
       />
