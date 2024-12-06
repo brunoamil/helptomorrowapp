@@ -13,7 +13,7 @@ async function signIn(
   email: string,
   password: string,
 ): Promise<AuthCredentialsAPI> {
-  const response = await api.post<AuthCredentialsAPI>('login', {
+  const response = await api.post<AuthCredentialsAPI>('auth/login', {
     email,
     password,
   });
@@ -21,19 +21,22 @@ async function signIn(
 }
 
 async function signOut(): Promise<string> {
-  const response = await api.get<string>('profile/logout');
+  const response = await api.get<string>('auth/profile/logout');
   return response.data;
 }
 
 async function signUp(data: SignUpDataAPI): Promise<UserAPI> {
-  const response = await api.post<UserAPI>('register', data);
+  const response = await api.post<UserAPI>('auth/register', data);
   return response.data;
 }
 
 async function isUserNameAvailable(params: {username: string}) {
-  const response = await api.get<FieldIsAvailableAPI>('validate-username', {
-    params,
-  });
+  const response = await api.get<FieldIsAvailableAPI>(
+    'auth/validate-username',
+    {
+      params,
+    },
+  );
 
   return response.data;
 }
@@ -41,7 +44,7 @@ async function isUserNameAvailable(params: {username: string}) {
 async function isEmailAvailable(params: {
   email: string;
 }): Promise<FieldIsAvailableAPI> {
-  const response = await api.get<FieldIsAvailableAPI>('validate-email', {
+  const response = await api.get<FieldIsAvailableAPI>('auth/validate-email', {
     params,
   });
 
@@ -51,7 +54,10 @@ async function isEmailAvailable(params: {
 async function forgotPassword(
   params: ForgotPasswordParam,
 ): Promise<{message: string}> {
-  const response = await api.post<{message: string}>('forgot-password', params);
+  const response = await api.post<{message: string}>(
+    'auth/forgot-password',
+    params,
+  );
 
   return response.data;
 }
