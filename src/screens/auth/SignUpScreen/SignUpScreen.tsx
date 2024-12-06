@@ -54,7 +54,10 @@ export function SignUpScreen({navigation}: AuthScreenProps<'SignUpScreen'>) {
     signUp(formValues);
   }
 
-  const userNameValidation = useAsyncValidation({watch, getFieldState});
+  const {userEmailValidation, usernameValidation} = useAsyncValidation({
+    watch,
+    getFieldState,
+  });
 
   return (
     <Screen canGoBack scrollable>
@@ -65,11 +68,11 @@ export function SignUpScreen({navigation}: AuthScreenProps<'SignUpScreen'>) {
         control={control}
         name="username"
         label="Seu username"
-        errorMessage={userNameValidation.errorMessage}
+        errorMessage={usernameValidation.errorMessage}
         placeholder="@"
         boxProps={{mb: 's20'}}
         RightComponent={
-          userNameValidation.isFetching ? (
+          usernameValidation.isFetching ? (
             <ActivityIndicator size="small" color="primary" />
           ) : undefined
         }
@@ -97,6 +100,11 @@ export function SignUpScreen({navigation}: AuthScreenProps<'SignUpScreen'>) {
         label="E-mail"
         placeholder="Digite seu e-mail"
         boxProps={{mb: 's20'}}
+        RightComponent={
+          userEmailValidation.isFetching ? (
+            <ActivityIndicator size="small" color="primary" />
+          ) : undefined
+        }
       />
 
       <FormPasswordInput
@@ -109,7 +117,11 @@ export function SignUpScreen({navigation}: AuthScreenProps<'SignUpScreen'>) {
 
       <Button
         loading={isLoading}
-        disabled={!formState.isValid || userNameValidation.notReady}
+        disabled={
+          !formState.isValid ||
+          userEmailValidation.notReady ||
+          usernameValidation.notReady
+        }
         title="Criar uma conta"
         onPress={handleSubmit(submitForm)}
       />

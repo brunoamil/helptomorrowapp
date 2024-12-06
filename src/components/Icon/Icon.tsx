@@ -39,10 +39,12 @@ import {TrashIcon} from '../../assets/icons/TrashIcon';
 export interface IconBase {
   size?: number;
   color?: string;
+  fillColor?: string;
 }
 export interface IconProps {
   name: IconName;
   color?: ThemeColors;
+  fillColor?: ThemeColors;
   size?: number;
   onPress?: () => void;
 }
