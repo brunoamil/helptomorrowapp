@@ -38,7 +38,7 @@ async function remove(postCommentId: number): Promise<string> {
 
 function isAllowToTdelete(
   postComment: PostComment,
-  userId: number,
+  userId: number | null,
   postAuthorId: number,
 ): boolean {
   if (postComment.author.id === userId) {
