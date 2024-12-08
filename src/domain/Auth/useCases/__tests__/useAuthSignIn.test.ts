@@ -1,4 +1,4 @@
-import {AllTheProviders, renderHook, waitFor} from 'test-utils';
+import {waitFor, renderHook} from 'test-utils';
 
 import {authService} from '../../authService';
 import {useAuthSignIn} from '../useAuthSignIn';
@@ -21,9 +21,13 @@ describe('useAuthSignIn', () => {
     jest
       .spyOn(authService, 'signIn')
       .mockResolvedValueOnce(mockedAuthCredentials);
-    const {result} = renderHook(() => useAuthSignIn(), {
-      wrapper: AllTheProviders,
-    });
+
+    const mockedOnSucess = jest.fn();
+    const {result} = renderHook(() =>
+      useAuthSignIn({
+        onSuccess: mockedOnSucess,
+      }),
+    );
 
     result.current.signIn({
       email: 'mariajulia@coffstack.com',
@@ -33,12 +37,24 @@ describe('useAuthSignIn', () => {
     await waitFor(() => expect(result.current.isSuccess).toBe(true));
 
     expect(mockedSaveCredentials).toHaveBeenCalledWith(mockedAuthCredentials);
+    expect(mockedOnSucess).toHaveBeenCalledWith(mockedAuthCredentials);
   });
+  it('calls the onError function with a message if sig-in fails', async () => {
+    jest
+      .spyOn(authService, 'signIn')
+      .mockRejectedValue(new Error('invalid error'));
 
-  it('calls the onError function with a message if sig-in fails', () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const {result} = renderHook(() => useAuthSignIn(), {
-      wrapper: AllTheProviders,
-    });
+    const mockedError = jest.fn();
+    const {result} = renderHook(() =>
+      useAuthSignIn({
+        onError: mockedError,
+      }),
+    );
+
+    result.current.signIn({email: 'lucas@coffstack.com', password: '123'});
+
+    await waitFor(() => expect(result.current.isError).toBe(true));
+
+    expect(mockedError).toHaveBeenCalledWith('invalid error');
   });
 });
