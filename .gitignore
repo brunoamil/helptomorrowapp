@@ -67,3 +67,4 @@ yarn-error.log
 
 # VSCODE
 .vscode/.react/
+.env.local
