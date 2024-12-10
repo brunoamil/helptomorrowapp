@@ -38,6 +38,9 @@ export function PostCommentItem({
       {
         text: 'Confirmar',
         onPress: () => mutate({postCommentId: postComment.id}),
+      },
+      {
+        text: 'Cancelar',
         style: 'cancel',
       },
     ]);
