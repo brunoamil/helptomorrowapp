@@ -17,6 +17,7 @@ export function ProfileScreen({route}: AppScreenProps<'ProfileScreen'>) {
       {isError && <Text>error ao carregar perfil do usuário</Text>}
       {user && (
         <ScrollView
+          // eslint-disable-next-line react-native/no-inline-styles
           style={{flex: 1}}
           refreshControl={
             <RefreshControl refreshing={isFetching} onRefresh={refetch} />
