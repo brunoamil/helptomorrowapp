@@ -10,10 +10,11 @@ async function getList(page: number): Promise<Page<Post>> {
   // return [];
   // throw new Error('Erro de teste');
 
-  return {
-    meta: apiAdapter.toMetaDataPage(postPageAPI.meta),
-    data: postPageAPI.data.map(postAdapter.toPost),
-  };
+  return apiAdapter.toPageModel(postPageAPI, postAdapter.toPost);
+  // return {
+  //   meta: apiAdapter.toMetaDataPage(postPageAPI.meta),
+  //   data: postPageAPI.data.map(postAdapter.toPost),
+  // };
 }
 
 export const postService = {

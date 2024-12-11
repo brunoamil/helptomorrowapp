@@ -11,6 +11,7 @@ export function SearchScreen({}: AppScreenProps<'SearchScreen'>) {
       canGoBack
       HeaderComponent={
         <TextInput
+          placeholder="Digite sua busca"
           value={search}
           onChangeText={setSearch}
           LeftComponent={<Icon name="search" color="gray3" />}
