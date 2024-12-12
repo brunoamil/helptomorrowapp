@@ -26,7 +26,7 @@ const config: Config = {
   ],
   coveragePathIgnorePatterns: ['/node_modules/', 'index'],
   transformIgnorePatterns: [
-    'node_modules/(?!((jest-)?react-native|@react-native(-community)?|react-native-safe-area-context)/)',
+    'node_modules/(?!((jest-)?react-native|@react-native(-community)?|react-native-safe-area-context|@react-navigation)/)',
   ],
 };
 
