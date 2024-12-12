@@ -30,6 +30,7 @@ type RestyleTypes = BackgroundColorProps<Theme> &
   SpacingShorthandProps<Theme> &
   LayoutProps<Theme> &
   BorderProps<Theme>;
+
 export type TouchableOpacityBoxProps = RNTouchableOpacityProps & RestyleTypes;
 
 export const TouchableOpacityBox = createRestyleComponent<
@@ -41,6 +42,7 @@ export const TouchableOpacityBox = createRestyleComponent<
 );
 
 export type PressableBoxProps = RNPressableProps & RestyleTypes;
+
 export const PressableBox = createRestyleComponent<PressableBoxProps, Theme>(
   [backgroundColor, spacing, spacingShorthand, layout, border],
   Pressable,
