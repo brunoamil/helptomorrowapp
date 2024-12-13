@@ -46,4 +46,25 @@ export const buttonPresets: Record<
       content: {color: 'gray2'},
     },
   },
+  ghost: {
+    default: {
+      container: {
+        backgroundColor: 'white70',
+        height: 40,
+      },
+      content: {
+        color: 'grayBlack',
+        textProps: {
+          preset: 'paragraphSmall',
+          bold: false,
+        },
+      },
+    },
+    disabled: {
+      container: {
+        backgroundColor: 'grayWhite',
+      },
+      content: {color: 'grayBlack'},
+    },
+  },
 };

@@ -19,7 +19,7 @@ export function Header({imageUri, imageWidth}: Props) {
           },
           styles.imageBackground,
         ]}>
-        <Button title="Escolher essa foto" mb="s24" />
+        <Button title="Escolher essa foto" mb="s24" preset="ghost" />
       </ImageBackground>
       <Box {...$optionsStyle}>
         <Text preset="headingSmall">Sua galeria</Text>
