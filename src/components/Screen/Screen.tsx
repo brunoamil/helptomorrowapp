@@ -36,13 +36,11 @@ export function Screen({
           paddingHorizontal="s24"
           style={[{paddingTop: top, paddingBottom: bottom}, style]}
           {...boxProps}>
-          {canGoBack && (
-            <ScreenHeader
-              HeaderComponent={HeaderComponent}
-              canGoBack={canGoBack}
-              title={title}
-            />
-          )}
+          <ScreenHeader
+            HeaderComponent={HeaderComponent}
+            canGoBack={canGoBack}
+            title={title}
+          />
           {children}
         </Box>
       </Container>
