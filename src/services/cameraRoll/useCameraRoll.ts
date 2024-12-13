@@ -6,7 +6,10 @@ import {useInfiniteQuery} from '@tanstack/react-query';
 
 import {cameraRollService} from './cameraRollService';
 
-export function useCameralRoll(hasPermission: boolean) {
+export function useCameralRoll(
+  hasPermission: boolean,
+  onInitialLoad?: (imageUri: string) => void,
+) {
   const [list, setList] = useState<string[]>([]);
 
   const query = useInfiniteQuery({
@@ -22,8 +25,12 @@ export function useCameralRoll(hasPermission: boolean) {
         return [...prev, ...curr.photoList];
       }, []);
       setList(newList);
+
+      if (query.data.pages.length === 1 && onInitialLoad) {
+        onInitialLoad(newList[0]);
+      }
     }
-  }, [query.data]);
+  }, [query.data, onInitialLoad]);
 
   //Deprecated
   // async function getPhotos() {
@@ -50,6 +57,7 @@ export function useCameralRoll(hasPermission: boolean) {
   };
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function hasAndroidPermission() {
   if (Platform.OS === 'ios') {
     return true;
