@@ -5,4 +5,5 @@ export enum QueryKeys {
   IsUsernameAvailable = 'IsUsernameAvailable',
   IsEmailAvailable = 'IsUsernameAvailable',
   UserList = 'UserList',
+  CameraRollList = 'CameraRollList',
 }

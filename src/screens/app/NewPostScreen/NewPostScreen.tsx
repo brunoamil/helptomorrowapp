@@ -15,7 +15,7 @@ export function NewPostScreen({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   navigation,
 }: AppTabScreenProps<'NewPostScreen'>) {
-  const {list} = useCameralRoll();
+  const {photoList, fetchNextPage} = useCameralRoll(true);
 
   function renderItem({item}: ListRenderItemInfo<string>) {
     return (
@@ -29,11 +29,13 @@ export function NewPostScreen({
   return (
     <Screen canGoBack title="Novo post" noPaddingHorizontal>
       <FlatList
-        data={list}
+        data={photoList}
         renderItem={renderItem}
         numColumns={NUM_COLUMNS}
+        onEndReached={fetchNextPage}
+        onEndReachedThreshold={0.1}
         ListHeaderComponent={
-          <Header imageUri={list[0]} imageWidth={SCREEN_WIDTH} />
+          <Header imageUri={photoList[0]} imageWidth={SCREEN_WIDTH} />
         }
       />
     </Screen>
