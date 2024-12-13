@@ -7,7 +7,7 @@ import {
   Pressable,
 } from 'react-native';
 
-import {useCameralRoll} from '@services';
+import {useCameralRoll, usePermission} from '@services';
 
 import {Screen} from '@components';
 import {AppTabScreenProps} from '@routes';
@@ -21,8 +21,12 @@ export function NewPostScreen({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   navigation,
 }: AppTabScreenProps<'NewPostScreen'>) {
+  const permission = usePermission('photoLibrary');
   const [selectedImage, setSelectedImage] = useState<string>();
-  const {photoList, fetchNextPage} = useCameralRoll(true, setSelectedImage);
+  const {photoList, fetchNextPage} = useCameralRoll(
+    permission.status === 'granted',
+    setSelectedImage,
+  );
   const flatListRef = useRef<FlatList>(null);
 
   function onSelectImage(imageUri: string) {
