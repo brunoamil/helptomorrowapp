@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
 import {Dimensions, StyleSheet} from 'react-native';
 
-import {Box, BoxProps, Icon} from '@components';
+import {Box, BoxProps, Icon, PermissionManager} from '@components';
 import {useAppSafeArea} from '@hooks';
 import {AppScreenProps} from '@routes';
 
 const CAMERA_VIEW = Dimensions.get('screen').width;
 const CONTROL_HEIGHT = (Dimensions.get('screen').height - CAMERA_VIEW) / 2;
-const CONTROL_DIFF = 20;
+const CONTROL_DIFF = 30;
 export function CameraScreen({navigation}: AppScreenProps<'CameraScreen'>) {
   const [flashOn, setFlashOn] = useState(false);
   const {top} = useAppSafeArea();
@@ -16,29 +16,33 @@ export function CameraScreen({navigation}: AppScreenProps<'CameraScreen'>) {
     setFlashOn(prev => !prev);
   }
   return (
-    <Box flex={1}>
-      <Box backgroundColor="grayWhite" style={StyleSheet.absoluteFill} />
-      <Box flex={1} justifyContent="space-between">
-        <Box {...$controlAreaTop} style={{paddingTop: top}}>
-          <Icon
-            size={20}
-            name="arrowLeft"
-            color="grayWhite"
-            onPress={navigation.goBack}
-          />
-          <Icon
-            size={20}
-            name={flashOn ? 'flashOn' : 'flashOff'}
-            color="grayWhite"
-            onPress={toggleFlash}
-          />
-          <Box width={20} />
-        </Box>
-        <Box {...$controlAreaBottom}>
-          <Icon name="cameraClick" color="grayWhite" />
+    <PermissionManager
+      permissionName="camera"
+      description="Permissa o HelpTomorrow acessar a sua câmera">
+      <Box flex={1}>
+        <Box backgroundColor="grayWhite" style={StyleSheet.absoluteFill} />
+        <Box flex={1} justifyContent="space-between">
+          <Box {...$controlAreaTop} style={{paddingTop: top}}>
+            <Icon
+              size={20}
+              name="arrowLeft"
+              color="grayWhite"
+              onPress={navigation.goBack}
+            />
+            <Icon
+              size={20}
+              name={flashOn ? 'flashOn' : 'flashOff'}
+              color="grayWhite"
+              onPress={toggleFlash}
+            />
+            <Box width={20} />
+          </Box>
+          <Box {...$controlAreaBottom}>
+            <Icon name="cameraClick" color="grayWhite" />
+          </Box>
         </Box>
       </Box>
-    </Box>
+    </PermissionManager>
   );
 }
 
