@@ -12,5 +12,5 @@ export * from './TextInput/TextInput';
 export * from './PostItem/PostItem';
 export * from './ProfileAvatar/ProfileAvatar';
 export * from './ProfileUser/ProfileUser';
-
+export * from './PermissionManager/PermissionManager';
 export * from './Toast/Toast';

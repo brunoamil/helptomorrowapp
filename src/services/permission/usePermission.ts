@@ -31,6 +31,6 @@ export function usePermission(permissionName: PermissionName) {
 
   return {
     status,
-    loading,
+    isLoading: loading,
   };
 }

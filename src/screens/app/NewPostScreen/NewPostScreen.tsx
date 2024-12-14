@@ -9,7 +9,7 @@ import {
 
 import {useCameralRoll, usePermission} from '@services';
 
-import {Screen} from '@components';
+import {PermissionManager, Screen} from '@components';
 import {AppTabScreenProps} from '@routes';
 
 import {Header} from './components/Header';
@@ -45,18 +45,22 @@ export function NewPostScreen({
     );
   }
   return (
-    <Screen canGoBack title="Novo post" noPaddingHorizontal>
-      <FlatList
-        ref={flatListRef}
-        data={photoList}
-        renderItem={renderItem}
-        numColumns={NUM_COLUMNS}
-        onEndReached={fetchNextPage}
-        onEndReachedThreshold={0.1}
-        ListHeaderComponent={
-          <Header imageUri={selectedImage} imageWidth={SCREEN_WIDTH} />
-        }
-      />
-    </Screen>
+    <PermissionManager
+      permissionName="photoLibrary"
+      description="Permita o HelpTomorrow acessar as imagems da sua galeria">
+      <Screen canGoBack title="Novo post" noPaddingHorizontal>
+        <FlatList
+          ref={flatListRef}
+          data={photoList}
+          renderItem={renderItem}
+          numColumns={NUM_COLUMNS}
+          onEndReached={fetchNextPage}
+          onEndReachedThreshold={0.1}
+          ListHeaderComponent={
+            <Header imageUri={selectedImage} imageWidth={SCREEN_WIDTH} />
+          }
+        />
+      </Screen>
+    </PermissionManager>
   );
 }
