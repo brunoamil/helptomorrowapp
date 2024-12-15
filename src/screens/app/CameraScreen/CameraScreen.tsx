@@ -1,8 +1,11 @@
 import React, {useState} from 'react';
 import {Dimensions, StyleSheet} from 'react-native';
 
+import {useIsFocused} from '@react-navigation/native';
+import {useCameraDevice, Camera} from 'react-native-vision-camera';
+
 import {Box, BoxProps, Icon, PermissionManager} from '@components';
-import {useAppSafeArea} from '@hooks';
+import {useAppSafeArea, useAppState} from '@hooks';
 import {AppScreenProps} from '@routes';
 
 const CAMERA_VIEW = Dimensions.get('screen').width;
@@ -11,7 +14,10 @@ const CONTROL_DIFF = 30;
 export function CameraScreen({navigation}: AppScreenProps<'CameraScreen'>) {
   const [flashOn, setFlashOn] = useState(false);
   const {top} = useAppSafeArea();
-
+  const device = useCameraDevice('back');
+  const isFocused = useIsFocused();
+  const appState = useAppState();
+  const useActive = isFocused && appState === 'active';
   function toggleFlash() {
     setFlashOn(prev => !prev);
   }
@@ -20,7 +26,14 @@ export function CameraScreen({navigation}: AppScreenProps<'CameraScreen'>) {
       permissionName="camera"
       description="Permissa o HelpTomorrow acessar a sua câmera">
       <Box flex={1}>
-        <Box backgroundColor="grayWhite" style={StyleSheet.absoluteFill} />
+        {device != null && (
+          <Camera
+            device={device}
+            isActive={useActive}
+            style={StyleSheet.absoluteFill}
+          />
+        )}
+
         <Box flex={1} justifyContent="space-between">
           <Box {...$controlAreaTop} style={{paddingTop: top}}>
             <Icon

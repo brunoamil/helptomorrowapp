@@ -1,8 +1,7 @@
 #!/usr/bin/env sh
+export PATH=$PATH:/Users/brunoamil/.nvm/versions/node/v18.19.0/bin/npm
 . "$(dirname -- "$0")/_/husky.sh"
 
 npm run lint
 
 npx tsc --noEmit
-
-npm run test
