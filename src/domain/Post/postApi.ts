@@ -15,11 +15,11 @@ async function getList(params?: PageParams): Promise<PageAPI<PostAPI>> {
 
 async function createPost(
   text: string,
-  imageURL: ImageForUpload,
+  imageCover: ImageForUpload,
 ): Promise<PostAPI> {
   const form = new FormData();
   form.append('text', text);
-  form.append('image', imageURL);
+  form.append('image', imageCover);
 
   const response = await api.postForm<PostAPI>('user/post', form);
   return response.data;
