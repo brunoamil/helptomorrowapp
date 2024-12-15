@@ -21,7 +21,7 @@ function prepareImageForUpload(imageUri: string): ImageForUpload {
   return {
     uri: imageUri,
     name: 'name',
-    type: 'image/jpeg',
+    type: 'image/png',
   };
 }
 export const multiMediaService = {
