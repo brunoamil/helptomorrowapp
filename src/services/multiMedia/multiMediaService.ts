@@ -1,4 +1,21 @@
-import {ImageForUpload} from './multiMediaTypes';
+import {CameraRoll} from '@react-native-camera-roll/camera-roll';
+
+import {ImageForUpload, PhotoListPaginated} from './multiMediaTypes';
+
+async function getPhotos(cursor?: string): Promise<PhotoListPaginated> {
+  const photoPage = await CameraRoll.getPhotos({
+    first: 8,
+    after: cursor,
+  });
+
+  const photoList = photoPage.edges.map(edge => edge.node.image.uri);
+
+  return {
+    photoList,
+    cursor: photoPage.page_info.end_cursor,
+    hasNextPage: photoPage.page_info.has_next_page,
+  };
+}
 
 function prepareImageForUpload(imageUri: string): ImageForUpload {
   return {
@@ -9,4 +26,5 @@ function prepareImageForUpload(imageUri: string): ImageForUpload {
 }
 export const multiMediaService = {
   prepareImageForUpload,
+  getPhotos,
 };
