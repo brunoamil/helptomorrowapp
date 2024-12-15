@@ -67,3 +67,7 @@ yarn-error.log
 
 # VSCODE
 .vscode/.react/
+# Expo
+.expo
+dist/
+web-build/
