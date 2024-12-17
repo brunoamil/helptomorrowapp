@@ -63,6 +63,7 @@ export const buttonPresets: Record<
     disabled: {
       container: {
         backgroundColor: 'grayWhite',
+        height: 40,
       },
       content: {color: 'grayBlack'},
     },
