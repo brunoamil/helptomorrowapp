@@ -14,3 +14,4 @@ export * from './ProfileAvatar/ProfileAvatar';
 export * from './ProfileUser/ProfileUser';
 export * from './PermissionManager/PermissionManager';
 export * from './Toast/Toast';
+export * from './Separator/Separator';
