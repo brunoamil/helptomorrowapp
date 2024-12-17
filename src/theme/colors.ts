@@ -49,7 +49,7 @@ const lightTheme = {
   buttonGrayContainer: palette.gray5,
   buttonGrayContent: palette.grayBlack,
 };
-const darkTheme = {
+const darkTheme: typeof lightTheme = {
   ...palette,
   primary: palette.carrotSecondary,
   primaryContrast: palette.grayWhite,
