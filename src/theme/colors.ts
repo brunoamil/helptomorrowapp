@@ -48,6 +48,8 @@ const lightTheme = {
 
   buttonGrayContainer: palette.gray5,
   buttonGrayContent: palette.grayBlack,
+
+  separator: palette.gray4,
 };
 const darkTheme: typeof lightTheme = {
   ...palette,
@@ -77,6 +79,8 @@ const darkTheme: typeof lightTheme = {
 
   buttonGrayContainer: palette.gray1,
   buttonGrayContent: palette.grayWhite,
+
+  separator: palette.gray3,
 };
 
 export const colors = {palette, lightTheme, darkTheme};
