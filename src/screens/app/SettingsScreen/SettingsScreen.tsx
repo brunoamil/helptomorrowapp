@@ -10,7 +10,6 @@ import {MenuItem, MenuItemProps} from './components/MenuItem';
 
 // type ScreenProps = NativeStackScreenProps<AppStackParamList, 'SettingsScreen'>;
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function SettingsScreen({navigation}: AppScreenProps<'SettingsScreen'>) {
   const {signOut, isLoading} = useAuthSignOut();
 
@@ -25,7 +24,7 @@ export function SettingsScreen({navigation}: AppScreenProps<'SettingsScreen'>) {
     },
     {
       label: 'Modo Escuro',
-      onPress: () => console.log('Settings'),
+      onPress: () => navigation.navigate('DarkModeScreen'),
     },
   ];
 

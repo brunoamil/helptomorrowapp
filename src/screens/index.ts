@@ -5,6 +5,7 @@ export * from './auth/SignUpScreen/SignUpScreen';
 
 export * from './app/HomeScreen/HomeScreen';
 export * from './app/SettingsScreen/SettingsScreen';
+export * from './app/DarkModeScreen/DarkModeScreen';
 export * from './app/NewPostScreen/NewPostScreen';
 export * from './app/PublishPostScreen/PublishPostScreen';
 export * from './app/FavoriteScreen/FavoriteScreen';
