@@ -6,15 +6,16 @@ import {OnboardingScreenProps} from '@routes';
 
 import {OnboardingPage} from './components/OnboardingPage';
 import {OnboardingPageItem, onboardingPages} from './onboardingData';
+import { useSettingsService } from '@services';
 
 export function OnboardingScreen({}: OnboardingScreenProps<'OnboardingScreen'>) {
   const [pageIndex, setPageIndex] = useState(0);
   const flatListRef = useRef<FlatList<OnboardingPageItem>>(null);
-
+  const {finishOnboarding} = useSettingsService();
   function onPressNext() {
     const isLastPage = pageIndex === onboardingPages.length - 1;
     if (isLastPage) {
-      onFinishOnboarding();
+      finishOnboarding();
     } else {
       const nextIndex = pageIndex + 1;
       flatListRef.current?.scrollToIndex({
@@ -25,13 +26,12 @@ export function OnboardingScreen({}: OnboardingScreenProps<'OnboardingScreen'>) 
     }
   }
 
-  function onFinishOnboarding() {}
   function renderItem({item}: ListRenderItemInfo<OnboardingPageItem>) {
     return (
       <OnboardingPage
         pageItem={item}
         onPressNext={onPressNext}
-        onPressSkip={onFinishOnboarding}
+        onPressSkip={finishOnboarding}
       />
     );
   }
