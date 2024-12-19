@@ -603,7 +603,7 @@
 				DEVELOPMENT_TEAM = JRW2P754L3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = helptomorrowapp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Help Tomorrow";
+				INFOPLIST_KEY_CFBundleDisplayName = "Help T";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -635,7 +635,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JRW2P754L3;
 				INFOPLIST_FILE = helptomorrowapp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Help Tomorrow";
+				INFOPLIST_KEY_CFBundleDisplayName = "Help T";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -724,10 +724,7 @@
 					"-DFOLLY_USE_LIBCPP=1",
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
@@ -796,10 +793,7 @@
 					"-DFOLLY_USE_LIBCPP=1",
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
