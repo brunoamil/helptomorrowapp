@@ -1,15 +1,26 @@
 import React from 'react';
 
-import {Box, Icon, Text} from '@components';
+import {Box, Icon, PressableBox, Text} from '@components';
 
-export function BottomMenu() {
+import {OnboardingPageProps} from './OnboardingPage';
+
+type BottomMenuProps = Pick<OnboardingPageProps, 'onPressNext' | 'onPressSkip'> & {
+  isLast: boolean
+};
+export function BottomMenu({onPressNext, onPressSkip, isLast}: BottomMenuProps) {
+  const nextText = isLast ? 'Começar' : 'Próximo'
   return (
     <Box flexDirection="row" justifyContent="space-between">
-      <Text>Pular</Text>
-      <Box flexDirection="row" alignItems="center">
-        <Text mr="s4">Próximo</Text>
-        <Icon name="arrowRight" />
-      </Box>
+      <PressableBox hitSlop={10} onPress={onPressSkip}>
+        <Text color='gray2' semiBold>Pular</Text>
+      </PressableBox>
+      <PressableBox
+        flexDirection="row"
+        alignItems="center"
+        onPress={onPressNext}>
+        <Text mr="s4" bold>{nextText}</Text>
+        <Icon name="arrowRight" color='carrotSecondary' />
+      </PressableBox>
     </Box>
   );
 }

@@ -33,6 +33,7 @@ module.exports = {
               caseInsensitive: true,
             },
             'newlines-between': 'always',
+            'react-native/no-inline-styles': 'off',
           },
         ],
       },
