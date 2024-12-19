@@ -31,7 +31,7 @@ export function Screen({
   return (
     <KeyboardAvoidingView
       // eslint-disable-next-line react-native/no-inline-styles
-      style={{flex: 1, marginTop: spacing.s8}}
+      style={{flex: 1}}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <Container backgroundColor={colors.background}>
         <Box
