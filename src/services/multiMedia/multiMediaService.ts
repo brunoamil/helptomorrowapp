@@ -23,7 +23,6 @@ async function getPhotos(cursor?: string): Promise<PhotoListPaginated> {
 async function prepareImageForUpload(
   imageUri: string,
 ): Promise<ImageForUpload> {
-  console.log('...imageUri', imageUri);
   const image = await manipulateAsync(prepareImageUri(imageUri), [], {
     compress: 0.5,
     format: SaveFormat.JPEG,

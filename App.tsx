@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {Appearance} from 'react-native';
 
-import {useAppColor} from '@services';
+import {useAppColor, useSettingsService} from '@services';
 import {ThemeProvider} from '@shopify/restyle';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
@@ -16,7 +17,21 @@ initializeStorage(MMVKStorage);
 
 const queryClient = new QueryClient();
 function App(): React.JSX.Element {
+  const {onSystemChange} = useSettingsService();
   const appColor = useAppColor();
+
+  useEffect(() => {
+    onSystemChange(Appearance.getColorScheme());
+  }, [onSystemChange]);
+
+  useEffect(() => {
+    const subscription = Appearance.addChangeListener(preferences => {
+      onSystemChange(preferences.colorScheme);
+    });
+    return () => {
+      subscription.remove();
+    };
+  }, [onSystemChange]);
 
   return (
     <AuthCredentialsProvider>
