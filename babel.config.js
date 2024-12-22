@@ -1,5 +1,6 @@
 module.exports = {
-  presets: ['babel-preset-expo'],
+  // presets: ['babel-preset-expo'], if error go back this
+  presets: ['module:@react-native/babel-preset'],
   plugins: [
     [
       'module-resolver',

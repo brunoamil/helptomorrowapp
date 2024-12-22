@@ -29,9 +29,11 @@ async function check(name: PermissionName): Promise<PermissionStatus> {
 }
 
 function mapNameToPermission(name: PermissionName): Permission | null {
+  const plataform = Platform.Version as number;
+
   switch (name) {
     case 'photoLibrary':
-      if (Number(Platform.Version) >= 33) {
+      if (plataform >= 33) {
         return 'android.permission.READ_MEDIA_IMAGES';
       } else {
         return 'android.permission.READ_EXTERNAL_STORAGE';
