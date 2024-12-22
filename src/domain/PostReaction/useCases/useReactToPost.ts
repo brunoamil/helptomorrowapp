@@ -1,20 +1,26 @@
+import {useState} from 'react';
+
 import {
   Post,
-  PostReaction,
   PostReactionBase,
-  postReactionService,
   PostReactionType,
+  postReactionService,
 } from '@domain';
 import {MutationOptions, QueryKeys} from '@infra';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
-import {useState} from 'react';
+
 type Params = {
   post: Post;
   postReactionType: PostReactionType;
   options?: MutationOptions<PostReactionBase>;
   queryKeys?: QueryKeys[];
 };
-export function useReactToPost({post, postReactionType, options, queryKeys}: Params) {
+export function useReactToPost({
+  post,
+  postReactionType,
+  options,
+  queryKeys,
+}: Params) {
   const initialHasReacted = postReactionService.hasReactedToPost(
     post.reactions,
     postReactionType,
@@ -29,6 +35,7 @@ export function useReactToPost({post, postReactionType, options, queryKeys}: Par
   });
 
   const queryClient = useQueryClient();
+
   const {mutate} = useMutation<PostReactionBase, Error>({
     mutationFn: () =>
       postReactionService.reactToPost(post.id, postReactionType),
@@ -54,12 +61,13 @@ export function useReactToPost({post, postReactionType, options, queryKeys}: Par
 
   function toggleReactionState() {
     setReactionState(prev => ({
-        hasReacted: !prev.hasReacted,
-        reactionCount: prev.hasReacted
-          ? prev.reactionCount - 1
-          : prev.reactionCount + 1,
-      }));
+      hasReacted: !prev.hasReacted,
+      reactionCount: prev.hasReacted
+        ? prev.reactionCount - 1
+        : prev.reactionCount + 1,
+    }));
   }
+
   return {
     hasReacted: reactionState.hasReacted,
     reactionCount: reactionState.reactionCount,
