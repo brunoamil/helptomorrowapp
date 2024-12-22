@@ -14,18 +14,18 @@ type ItemTConstrains = {
   id: number | string;
 };
 type Props<ItemT extends ItemTConstrains> = {
-  queryKey: QueryKeys;
-  //   getList: (page: number) => Promise<Page<ItemT>>;
-  getList: Parameters<typeof usePaginatedListRQ>[1];
-  flatListProps: Omit<Partial<FlatListProps<ItemT>>, 'renderItem'>;
+  queryKey: Parameters<typeof usePaginatedListRQ<ItemT>>[0];
+  getList: Parameters<typeof usePaginatedListRQ<ItemT>>[1];
+  // getList: (page: number) => Promise<Page<Data>>,
   renderItem: FlatListProps<ItemT>['renderItem'];
-  emptyListProps: Pick<EmptyListProps, 'emptyMessage' | 'errorMessage'>;
+  flatListProps?: Omit<Partial<FlatListProps<ItemT>>, 'renderItem'>;
+  emptyListProps?: Pick<EmptyListProps, 'emptyMessage' | 'errorMessage'>;
 };
 export function InfinityScrollList<ItemT extends ItemTConstrains>({
   emptyListProps,
   flatListProps,
-  getList,
   queryKey,
+  getList,
   renderItem,
 }: Props<ItemT>) {
   const {list, isError, isLoading, refresh, fetchNextPage} = usePaginatedListRQ(
@@ -33,33 +33,37 @@ export function InfinityScrollList<ItemT extends ItemTConstrains>({
     getList,
   );
 
-  const flatListRef = useRef<FlatList<ItemT>>(null);
+  const flatListRef = React.useRef<FlatList<ItemT>>(null);
   useScrollToTop(flatListRef);
 
   return (
     <FlatList
       ref={flatListRef}
-      renderItem={renderItem}
+      showsVerticalScrollIndicator={false}
       data={list}
       keyExtractor={item => item.id.toString()}
-      showsVerticalScrollIndicator={false}
+      renderItem={renderItem}
       onEndReached={fetchNextPage}
       onEndReachedThreshold={0.1}
+      refreshing={isLoading}
       refreshControl={
         <RefreshControl refreshing={isLoading} onRefresh={refresh} />
       }
-      refreshing={isLoading}
       ListEmptyComponent={
         <EmptyList
-          loading={isLoading}
-          error={isError}
           refetch={refresh}
+          error={isError}
+          loading={isLoading}
           {...emptyListProps}
         />
       }
-      // eslint-disable-next-line react-native/no-inline-styles
-      contentContainerStyle={{flex: list.length === 0 ? 1 : undefined}}
       {...flatListProps}
+      contentContainerStyle={[
+        {
+          flex: list.length === 0 ? 1 : undefined,
+        },
+        flatListProps?.contentContainerStyle,
+      ]}
     />
   );
 }
