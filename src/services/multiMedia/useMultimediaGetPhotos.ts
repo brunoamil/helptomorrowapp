@@ -10,7 +10,6 @@ export function useMultimediaGetPhotos(
   onInitialLoad?: (imageUri: string) => void,
 ) {
   const [list, setList] = useState<string[]>([]);
-  console.log('hasPermission', hasPermission);
   const query = useInfiniteQuery({
     queryKey: [QueryKeys.CameraRollList],
     queryFn: ({pageParam}) => multiMediaService.getPhotos(pageParam),
