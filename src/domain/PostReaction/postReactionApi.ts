@@ -19,7 +19,7 @@ async function getMyReact(myReactionsParam?: MyReactionsParam): Promise<PageAPI<
 
 
 async function createOrUpdateReaction(post_id: number, reaction_type: PostReactionType): Promise<PostReactionBaseAPI> {
-    const path = `${POST_REACTION_PATH}/reactions/${post_id}/${reaction_type}`;
+    const path = `${POST_REACTION_PATH}/${post_id}/${reaction_type}`;
     const response = await api.post<PostReactionBaseAPI>(path);
     return response.data;
 }
