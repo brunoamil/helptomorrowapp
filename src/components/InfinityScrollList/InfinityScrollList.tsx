@@ -29,7 +29,7 @@ export function InfinityScrollList<ItemT extends ItemTConstrains>({
   renderItem,
 }: Props<ItemT>) {
   const {list, isError, isLoading, refresh, fetchNextPage} = usePaginatedListRQ(
-    [queryKey],
+    queryKey,
     getList,
   );
 
