@@ -23,6 +23,7 @@ export function FavoriteScreen(props: AppTabScreenProps<'FavoriteScreen'>) {
       <PressableBox onPress={() => navigation.navigate('PostCommentScreen', {
         postId: item.postId,
         postAuthorId: item.author.id,
+        showPost: true,
       })}>
         <Image 
         source={{ uri: item.post.imageURL}}

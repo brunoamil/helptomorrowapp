@@ -21,9 +21,10 @@ export function PostCommentScreen({
   const {bottom} = useAppSafeArea();
   const postId = route.params.postId;
   const postAuthorId = route.params.postAuthorId;
+  const showPost = route.params.showPost || false;
 
   const {list, fetchNextPage, hasNextPage} = usePostCommentList(postId);
-  const {post} = usePostGetById(postId);
+  const {post} = usePostGetById(postId, showPost);
   function renderItem({item}: ListRenderItemInfo<PostComment>) {
     return (
       <PostCommentItem
@@ -36,18 +37,19 @@ export function PostCommentScreen({
   }
 
   return (
-    <Screen flex={1} title="Comentários" canGoBack>
+    <Screen  noPaddingHorizontal flex={1} title={showPost ? 'Post' : 'Comentários'} canGoBack>
       <Box flex={1} justifyContent="space-between">
         <FlatList
           data={list}
           renderItem={renderItem}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{paddingBottom: bottom}}
-          ListHeaderComponent={post && <PostItem post={post}/>}
+          ListHeaderComponent={post && <PostItem post={post} hideCommentAction={showPost} />}
           ListFooterComponent={
             <PostCommentBottom
               fetchNextPage={fetchNextPage}
               hasNextPage={hasNextPage}
+            
             />
           }
         />

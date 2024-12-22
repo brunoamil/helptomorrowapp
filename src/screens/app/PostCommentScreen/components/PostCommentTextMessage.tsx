@@ -3,7 +3,7 @@ import {Keyboard} from 'react-native';
 
 import {usePostCommentCreate} from '@domain';
 
-import {TextMessage} from '@components';
+import {Box, TextMessage} from '@components';
 
 interface Props {
   postId: number;
@@ -19,11 +19,13 @@ export function PostCommentTextMessage({postId}: Props) {
   const [message, setMessage] = useState('');
 
   return (
-    <TextMessage
+    <Box paddingHorizontal='s24'>
+      <TextMessage
       onPressSend={createComment}
       placeholder="Adicione um comentário"
       value={message}
       onChangeText={setMessage}
     />
+    </Box>
   );
 }
