@@ -37,6 +37,7 @@ export const mockedPostResponse: PageAPI<PostAPI> = {
       },
       status: 'published',
       meta: {like_count: '7', favorite_count: '3', comments_count: '3'},
+      reactions: [],
     },
     {
       id: 10,
@@ -61,6 +62,7 @@ export const mockedPostResponse: PageAPI<PostAPI> = {
       },
       status: 'published',
       meta: {like_count: '3', favorite_count: '4', comments_count: '3'},
+      reactions: [],
     },
   ],
 };
