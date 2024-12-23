@@ -1,8 +1,8 @@
-import {api} from '@api';
+import {api} from '../../api/apiConfig';
 
 import {authAdapter} from './authAdapter';
 import {authApi} from './authApi';
-import {AuthCredentials, SignUpData} from './authTypes';
+import {AuthCredentials,  SignUpData} from './authTypes';
 
 async function signIn(email: string, password: string) {
   try {

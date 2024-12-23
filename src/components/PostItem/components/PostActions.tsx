@@ -2,7 +2,11 @@ import React from 'react';
 
 import {Post, useReactToPost} from '@domain';
 
-import {Box, Icon, IconProps, Text, TouchableOpacityBox} from '@components';
+import {Text} from '../../Text/Text';
+import {Box, TouchableOpacityBox} from '../../Box/Box';
+
+import {Icon, IconProps} from '../../Icon/Icon'
+
 import { QueryKeys } from '@infra';
 import { useNavigation } from '@react-navigation/native';
 
