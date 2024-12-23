@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { authService} from '../domain/Auth/authService';
-import { AuthCredentials } from '../domain/Auth/authTypes';
+
+import {authService} from '../domain/Auth/authService';
+import {AuthCredentials} from '../domain/Auth/authTypes';
 
 export const BASE_URL = 'http://localhost:3333/';
 export const api = axios.create({

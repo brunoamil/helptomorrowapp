@@ -26,11 +26,15 @@ export function OnboardingPage({
       <Box flex={4}>
         <ImageHeader image={pageItem.image} />
       </Box>
-      <Box flex={5} paddingHorizontal='s24'>
+      <Box flex={5} paddingHorizontal="s24">
         <Content {...pageItem} />
       </Box>
-      <Box flex={1} paddingHorizontal='s24'>
-        <BottomMenu onPressNext={onPressNext} onPressSkip={onPressSkip} isLast={pageItem.isLast} />
+      <Box flex={1} paddingHorizontal="s24">
+        <BottomMenu
+          onPressNext={onPressNext}
+          onPressSkip={onPressSkip}
+          isLast={pageItem.isLast}
+        />
       </Box>
     </Box>
   );

@@ -1,26 +1,20 @@
 import React from 'react';
 
 import {Post, useReactToPost} from '@domain';
+import {QueryKeys} from '@infra';
+import {useNavigation} from '@react-navigation/native';
 
-import {Text} from '../../Text/Text';
 import {Box, TouchableOpacityBox} from '../../Box/Box';
-
-import {Icon, IconProps} from '../../Icon/Icon'
-
-import { QueryKeys } from '@infra';
-import { useNavigation } from '@react-navigation/native';
+import {Icon, IconProps} from '../../Icon/Icon';
+import {Text} from '../../Text/Text';
 
 type Props = {
   post: Post;
   hideCommentAction?: boolean;
 };
 
-export function PostActions({
-  post,
-  hideCommentAction
-}: Props) {
+export function PostActions({post, hideCommentAction}: Props) {
   const navigation = useNavigation();
-
 
   const likeReaction = useReactToPost({post, postReactionType: 'like'});
   const favoriteReaction = useReactToPost({
@@ -52,9 +46,9 @@ export function PostActions({
         text={post.commentCount}
       />
       <Item
-       marked={favoriteReaction.hasReacted}
-       onPress={favoriteReaction.reactToPost}
-       icon={{default: 'bookmark', marked: 'bookmarkFill'}}
+        marked={favoriteReaction.hasReacted}
+        onPress={favoriteReaction.reactToPost}
+        icon={{default: 'bookmark', marked: 'bookmarkFill'}}
         text={favoriteReaction.reactionCount}
       />
     </Box>

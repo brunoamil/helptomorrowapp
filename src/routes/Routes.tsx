@@ -1,14 +1,13 @@
 import React from 'react';
 
 import {NavigationContainer} from '@react-navigation/native';
-import {useAuthCredentials} from '@services';
 
 import {ActivityIndicator, Box} from '@components';
+import {Stacks, useRouter} from '@hooks';
 
 import {AppStack} from './AppStack';
 import {AuthStack} from './AuthStack';
 import {OnboardingStack} from './OnboardingStack';
-import { Stacks, useRouter } from '@hooks';
 
 function LoadingScreen() {
   return (
@@ -29,12 +28,8 @@ const stacks: Record<Stacks, React.ReactElement> = {
   Onboarding: <OnboardingStack />,
 };
 export function Router() {
-  const stack = useRouter()
+  const stack = useRouter();
 
-  const Stack = stacks[stack]
-  return (
-    <NavigationContainer>
-     {Stack}
-    </NavigationContainer>
-  );
+  const Stack = stacks[stack];
+  return <NavigationContainer>{Stack}</NavigationContainer>;
 }

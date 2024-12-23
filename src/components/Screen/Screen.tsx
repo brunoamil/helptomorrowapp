@@ -1,8 +1,9 @@
 import React from 'react';
 import {KeyboardAvoidingView, Platform} from 'react-native';
 
-import {Box, BoxProps} from '../Box/Box';
 import {useAppSafeArea, useAppTheme} from '@hooks';
+
+import {Box, BoxProps} from '../Box/Box';
 
 import {ScreenHeader, ScrollViewContainer, ViewContainer} from './components';
 
@@ -24,13 +25,12 @@ export function Screen({
   style,
   ...boxProps
 }: ScreenProps) {
-  const {colors, spacing} = useAppTheme();
+  const {colors} = useAppTheme();
   const {top, bottom} = useAppSafeArea();
 
   const Container = scrollable ? ScrollViewContainer : ViewContainer;
   return (
     <KeyboardAvoidingView
-      // eslint-disable-next-line react-native/no-inline-styles
       style={{flex: 1}}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <Container backgroundColor={colors.background}>

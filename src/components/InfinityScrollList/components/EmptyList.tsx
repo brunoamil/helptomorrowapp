@@ -13,7 +13,13 @@ export interface EmptyListProps {
   emptyMessage?: string;
   errorMessage?: string;
 }
-export function EmptyList({loading, error, refetch, emptyMessage = 'Não há publicações no seu feed.', errorMessage = 'Não foi possível carregar o feed'}: EmptyListProps) {
+export function EmptyList({
+  loading,
+  error,
+  refetch,
+  emptyMessage = 'Não há publicações no seu feed.',
+  errorMessage = 'Não foi possível carregar o feed',
+}: EmptyListProps) {
   let component = (
     <Text preset="paragraphMedium" bold>
       {emptyMessage}
@@ -28,7 +34,7 @@ export function EmptyList({loading, error, refetch, emptyMessage = 'Não há pub
     component = (
       <>
         <Text preset="paragraphMedium" bold mb="s16">
-         {errorMessage}
+          {errorMessage}
         </Text>
         <Button title="Recarregar" preset="outline" onPress={refetch} />
       </>

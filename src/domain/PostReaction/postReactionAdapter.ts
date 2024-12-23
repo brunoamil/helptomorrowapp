@@ -1,5 +1,5 @@
+import {userAdapter} from '../User/userAdapter';
 
-import { userAdapter } from '../User/userAdapter';
 import {
   PostReaction,
   PostReactionAPI,

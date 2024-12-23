@@ -8,8 +8,8 @@ type ContentProps = Omit<OnboardingPageItem, 'image'>;
 export function Content({title, subtitle, total, index}: ContentProps) {
   return (
     <Box>
-      <ProgressIndicator total={total} currentIndex={index} mb="s24"/>
-        <Text preset="headingLarge">
+      <ProgressIndicator total={total} currentIndex={index} mb="s24" />
+      <Text preset="headingLarge">
         {title.map((text, _index) => (
           <Text
             key={_index}
@@ -19,7 +19,9 @@ export function Content({title, subtitle, total, index}: ContentProps) {
           </Text>
         ))}
       </Text>
-      <Text preset="paragraphLarge" mt="s16">{subtitle}</Text>
+      <Text preset="paragraphLarge" mt="s16">
+        {subtitle}
+      </Text>
     </Box>
   );
 }

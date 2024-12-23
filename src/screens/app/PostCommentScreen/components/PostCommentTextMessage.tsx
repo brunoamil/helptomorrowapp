@@ -19,13 +19,13 @@ export function PostCommentTextMessage({postId}: Props) {
   const [message, setMessage] = useState('');
 
   return (
-    <Box paddingHorizontal='s24'>
+    <Box paddingHorizontal="s24">
       <TextMessage
-      onPressSend={createComment}
-      placeholder="Adicione um comentário"
-      value={message}
-      onChangeText={setMessage}
-    />
+        onPressSend={createComment}
+        placeholder="Adicione um comentário"
+        value={message}
+        onChangeText={setMessage}
+      />
     </Box>
   );
 }

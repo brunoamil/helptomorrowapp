@@ -14,7 +14,7 @@ export function PublishPostScreen({
 }: AppScreenProps<'PublishPostScreen'>) {
   const imageUri = route.params.imageUri;
   const {showToast} = useToastService();
-  const {createPost, isError, isLoading} = usePostCreate({
+  const {createPost, isLoading} = usePostCreate({
     onSuccess: () => {
       navigation.navigate('AppTabNavigator', {
         screen: 'HomeScreen',
@@ -32,7 +32,6 @@ export function PublishPostScreen({
     <Screen scrollable canGoBack title="Novo Post">
       <Image
         source={{uri: imageUri}}
-        // eslint-disable-next-line react-native/no-inline-styles
         style={{
           width: IMAGE_WIDTH,
           height: IMAGE_WIDTH,

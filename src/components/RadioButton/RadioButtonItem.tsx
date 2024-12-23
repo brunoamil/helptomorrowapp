@@ -25,7 +25,6 @@ export function RadioButtonItem({
         <RadioButton {...radioButtonProps} />
       </Box>
       {description && (
-        // eslint-disable-next-line react-native/no-inline-styles
         <Text color="paragraphSecondary" style={{width: '80%'}}>
           {description}
         </Text>

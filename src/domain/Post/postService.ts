@@ -34,5 +34,5 @@ async function getById(postId: number): Promise<Post> {
 export const postService = {
   getList,
   createPost,
-  getById
+  getById,
 };

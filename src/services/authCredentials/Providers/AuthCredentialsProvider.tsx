@@ -2,9 +2,9 @@ import React, {useEffect} from 'react';
 import {createContext, useState} from 'react';
 
 import {registerInterceptor} from '@api';
-import { authService} from '../../../domain/Auth/authService';
-import {AuthCredentials} from '../../../domain/Auth/authTypes';
 
+import {authService} from '../../../domain/Auth/authService';
+import {AuthCredentials} from '../../../domain/Auth/authTypes';
 import {authCredentialsStorage} from '../authCredentialsStorage';
 import {AuthCredentialsService} from '../authCredentialsTypes';
 

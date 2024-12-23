@@ -1,12 +1,13 @@
 import React, {useRef, useState} from 'react';
 import {FlatList, ListRenderItemInfo} from 'react-native';
 
+import {useSettingsService} from '@services';
+
 import {Box} from '@components';
 import {OnboardingScreenProps} from '@routes';
 
 import {OnboardingPage} from './components/OnboardingPage';
 import {OnboardingPageItem, onboardingPages} from './onboardingData';
-import { useSettingsService } from '@services';
 
 export function OnboardingScreen({}: OnboardingScreenProps<'OnboardingScreen'>) {
   const [pageIndex, setPageIndex] = useState(0);

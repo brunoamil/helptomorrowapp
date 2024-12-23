@@ -1,14 +1,10 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import {FlatList, FlatListProps, RefreshControl} from 'react-native';
 
-import {Post} from '@domain';
+import {usePaginatedListRQ} from '@infra';
 import {useScrollToTop} from '@react-navigation/native';
 
-import {AppTabScreenProps} from '@routes';
-
-import {QueryKeys, usePaginatedListRQ} from '@infra';
 import {EmptyList, EmptyListProps} from './components/EmptyList';
-import {Page} from '@types';
 
 type ItemTConstrains = {
   id: number | string;

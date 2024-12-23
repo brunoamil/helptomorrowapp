@@ -2,12 +2,12 @@ import React from 'react';
 import {ListRenderItemInfo, StyleProp, ViewStyle} from 'react-native';
 
 import {Post, postService} from '@domain';
+import {QueryKeys} from '@infra';
 
 import {InfinityScrollList, PostItem, Screen} from '@components';
 import {AppTabScreenProps} from '@routes';
 
 import {HomeHeader} from './components/HomeHeader';
-import {QueryKeys} from '@infra';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function HomeScreen({navigation}: AppTabScreenProps<'HomeScreen'>) {

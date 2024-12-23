@@ -1,4 +1,3 @@
-import { postApi } from './postApi';
 import {PostAPI, Post} from './postTypes';
 /**
  * @description Funcao para adaptar para o modelo final
@@ -21,7 +20,7 @@ function toPost(postAPI: PostAPI): Post {
     reactions: postAPI.reactions.map(reaction => ({
       emojiType: reaction.emoji_type,
       postId: reaction.post_id,
-    }))
+    })),
   };
 }
 export const postAdapter = {

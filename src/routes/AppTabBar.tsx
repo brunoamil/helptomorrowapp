@@ -56,7 +56,6 @@ export function AppTabBar({state, descriptors, navigation}: BottomTabBarProps) {
             testID={options.tabBarTestID}
             onPress={onPress}
             onLongPress={onLongPress}
-            // eslint-disable-next-line react-native/no-inline-styles
             style={{flex: 1}}>
             <Icon
               color={isFocused ? 'primary' : 'backgroundContrast'}

@@ -1,6 +1,7 @@
 import {AxiosRequestConfig} from 'axios';
 
 import {api} from '../../api/apiConfig';
+import {UserAPI} from '../User/userTypes';
 
 import {
   AuthCredentialsAPI,
@@ -8,7 +9,6 @@ import {
   ForgotPasswordParam,
   SignUpDataAPI,
 } from './authTypes';
-import { UserAPI } from '../User/userTypes';
 
 const REFRESH_TOKEN_URL = 'auth/refresh-token';
 

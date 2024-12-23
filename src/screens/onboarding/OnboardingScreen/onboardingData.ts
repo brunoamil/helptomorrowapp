@@ -14,7 +14,10 @@ export type OnboardingPageItem = {
   isLast: boolean;
 };
 
-type OnboardingPageItemWithoutMeta = Omit<OnboardingPageItem, 'index' | 'total' | 'isLast'>
+type OnboardingPageItemWithoutMeta = Omit<
+  OnboardingPageItem,
+  'index' | 'total' | 'isLast'
+>;
 
 const page1: OnboardingPageItemWithoutMeta = {
   title: [
@@ -54,9 +57,11 @@ const page3: OnboardingPageItemWithoutMeta = {
   },
 };
 
-export const onboardingPages: OnboardingPageItem[] = [page1, page2, page3].map((page, index, array) => ({
-  ...page,
-  index,
-  total: array.length,
-  isLast: index + 1 === array.length
-}));
+export const onboardingPages: OnboardingPageItem[] = [page1, page2, page3].map(
+  (page, index, array) => ({
+    ...page,
+    index,
+    total: array.length,
+    isLast: index + 1 === array.length,
+  }),
+);

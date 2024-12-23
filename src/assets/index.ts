@@ -6,5 +6,4 @@ export const images = {
   onboardingDark1: require('./images/onboarding/onboarding-dark-1.png'),
   onboardingDark2: require('./images/onboarding/onboarding-dark-2.png'),
   onboardingDark3: require('./images/onboarding/onboarding-dark-3.png'),
-  
 };

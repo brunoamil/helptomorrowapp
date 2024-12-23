@@ -37,19 +37,24 @@ export function PostCommentScreen({
   }
 
   return (
-    <Screen  noPaddingHorizontal flex={1} title={showPost ? 'Post' : 'Comentários'} canGoBack>
+    <Screen
+      noPaddingHorizontal
+      flex={1}
+      title={showPost ? 'Post' : 'Comentários'}
+      canGoBack>
       <Box flex={1} justifyContent="space-between">
         <FlatList
           data={list}
           renderItem={renderItem}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{paddingBottom: bottom}}
-          ListHeaderComponent={post && <PostItem post={post} hideCommentAction={showPost} />}
+          ListHeaderComponent={
+            post && <PostItem post={post} hideCommentAction={showPost} />
+          }
           ListFooterComponent={
             <PostCommentBottom
               fetchNextPage={fetchNextPage}
               hasNextPage={hasNextPage}
-            
             />
           }
         />

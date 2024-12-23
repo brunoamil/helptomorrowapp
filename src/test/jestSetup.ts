@@ -2,7 +2,7 @@
 import mockSafeAreaContext from 'react-native-safe-area-context/jest/mock';
 
 import {initializeStorage} from '../services/storage';
-import { inMemoryStorage } from '../services/storage/implementation/jest/inMemorySotrage';
+import {inMemoryStorage} from '../services/storage/implementation/jest/inMemorySotrage';
 // import {inMemoryStorage} from '../services/storage/implementation/jest/inMemoryStorage';
 
 jest.mock('react-native-safe-area-context', () => ({
