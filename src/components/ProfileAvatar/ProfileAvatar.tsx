@@ -1,5 +1,7 @@
 import React from 'react';
-import {Image} from 'react-native';
+import {Image, Pressable} from 'react-native';
+
+import {useAppNavigation} from '@hooks';
 
 export interface ProfileAvatarProps {
   imageURL: string;
@@ -11,16 +13,26 @@ export interface ProfileAvatarProps {
    *  @default 16
    */
   borderRadius?: number;
+  authorId?: number;
 }
 export function ProfileAvatar({
   imageURL,
   size = 32,
   borderRadius = 14,
+  authorId,
 }: ProfileAvatarProps) {
+  const navigate = useAppNavigation();
+  function handleOnPress() {
+    if (authorId) {
+      navigate.toProfile(authorId);
+    }
+  }
   return (
-    <Image
-      source={{uri: imageURL}}
-      style={{width: size, height: size, borderRadius}}
-    />
+    <Pressable onPress={handleOnPress} disabled={!authorId}>
+      <Image
+        source={{uri: imageURL}}
+        style={{width: size, height: size, borderRadius}}
+      />
+    </Pressable>
   );
 }
