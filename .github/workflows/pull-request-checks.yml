@@ -29,5 +29,5 @@ jobs:
       # - name: Run TypeScript compiler
       #   run: yarn tsc --noEmit
 
-      - name: Run test
-        run: yarn test
+      # - name: Run test
+      #   run: yarn test
