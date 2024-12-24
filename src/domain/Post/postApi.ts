@@ -3,7 +3,9 @@ import {ImageForUpload} from '@services';
 
 import {PostAPI} from './postTypes';
 
-async function getList(params?: PageParams): Promise<PageAPI<PostAPI>> {
+async function getList(
+  params?: PageParams & {user_id?: number},
+): Promise<PageAPI<PostAPI>> {
   //delay
   // await new Promise(resolve => setTimeout(() => resolve(''), 2000));
 
