@@ -34,14 +34,14 @@ export function ProfileHeader({
         />
 
         <Text preset="headingMedium" mt="s16">
-          {userDetails.email}
+          {userDetails.username}
         </Text>
         <Text preset="paragraphLarge" mt="s4" color="gray1">
           @{userDetails.username}
         </Text>
         <ProfileMetadata
-          followersCount={userDetails.meta.followersCount}
-          followingCount={userDetails.meta.followingCount}
+          followersCount={userDetails.meta?.followersCount}
+          followingCount={userDetails.meta?.followingCount}
           publicationCount={pulicationCount}
         />
         {isMyProfile ? (
