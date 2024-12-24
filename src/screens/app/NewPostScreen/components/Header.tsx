@@ -22,6 +22,7 @@ export function Header({imageUri, imageWidth}: Props) {
   function navigateToCamera() {
     navigation.navigate('CameraScreen');
   }
+
   return (
     <Box>
       <ImageBackground
