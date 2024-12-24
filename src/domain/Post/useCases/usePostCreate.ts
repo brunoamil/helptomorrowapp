@@ -7,6 +7,7 @@ import {Post} from '../postTypes';
 
 export function usePostCreate(options?: MutationOptions<Post>) {
   const queryClient = useQueryClient();
+
   const {mutate, isLoading, isError} = useMutation<
     Post,
     unknown,
@@ -22,7 +23,7 @@ export function usePostCreate(options?: MutationOptions<Post>) {
     },
     onError: () => {
       if (options?.onError) {
-        options.onError(options.errorMessage || 'erro ao criar post');
+        options.onError(options?.errorMessage || 'erro ao criar post');
       }
     },
   });
@@ -34,11 +35,8 @@ export function usePostCreate(options?: MutationOptions<Post>) {
     description: string;
     imageUri: string;
   }) {
-    const imageForUpload = await multimediaService.prepareImageForUpload(
-      imageUri,
-    );
-
-    mutate({text: description, imageCover: imageForUpload});
+    const imageCover = await multimediaService.prepareImageForUpload(imageUri);
+    mutate({text: description, imageCover});
   }
 
   return {
