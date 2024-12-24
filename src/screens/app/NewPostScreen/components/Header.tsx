@@ -13,16 +13,15 @@ interface Props {
 export function Header({imageUri, imageWidth}: Props) {
   const navigation = useNavigation();
 
-  function navigationToPublishPost() {
+  function navigateToPublishPost() {
     if (imageUri) {
       navigation.navigate('PublishPostScreen', {imageUri});
     }
   }
 
-  function navigationToCamera() {
+  function navigateToCamera() {
     navigation.navigate('CameraScreen');
   }
-
   return (
     <Box>
       <ImageBackground
@@ -36,16 +35,16 @@ export function Header({imageUri, imageWidth}: Props) {
         ]}>
         {Boolean(imageUri) && (
           <Button
-            title="Escolher essa foto"
-            mb="s24"
+            onPress={navigateToPublishPost}
             preset="ghost"
-            onPress={navigationToPublishPost}
+            title="Escolher essa"
+            mb="s24"
           />
         )}
       </ImageBackground>
       <Box {...$optionsStyle}>
         <Text preset="headingSmall">Sua galeria</Text>
-        <Icon name="camera" onPress={navigationToCamera} />
+        <Icon name="camera" onPress={navigateToCamera} />
       </Box>
     </Box>
   );

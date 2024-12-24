@@ -12,14 +12,8 @@ async function getList(page: number, userId?: number): Promise<Page<Post>> {
     per_page: 10,
     user_id: userId,
   });
-  // return [];
-  // throw new Error('Erro de teste');
 
   return apiAdapter.toPageModel(postPageAPI, postAdapter.toPost);
-  // return {
-  //   meta: apiAdapter.toMetaDataPage(postPageAPI.meta),
-  //   data: postPageAPI.data.map(postAdapter.toPost),
-  // };
 }
 
 async function createPost(

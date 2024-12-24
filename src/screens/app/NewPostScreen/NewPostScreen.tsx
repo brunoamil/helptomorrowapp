@@ -16,23 +16,23 @@ import {Header} from './components/Header';
 
 const SCREEN_WIDTH = Dimensions.get('screen').width;
 const NUM_COLUMNS = 4;
-const ITEM_WIDTH = SCREEN_WIDTH / 4;
-export function NewPostScreen({
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  navigation,
-}: AppTabScreenProps<'NewPostScreen'>) {
-  const permission = usePermission('photoLibrary');
+const ITEM_WIDTH = SCREEN_WIDTH / NUM_COLUMNS;
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function NewPostScreen(props: AppTabScreenProps<'NewPostScreen'>) {
   const [selectedImage, setSelectedImage] = useState<string>();
+  const permission = usePermission('photoLibrary');
   const {photoList, fetchNextPage} = useMultimediaGetPhotos(
     permission.status === 'granted',
     setSelectedImage,
   );
+
   const flatListRef = useRef<FlatList>(null);
 
   function onSelectImage(imageUri: string) {
     setSelectedImage(imageUri);
     flatListRef.current?.scrollToOffset({offset: 0, animated: true});
   }
+
   function renderItem({item}: ListRenderItemInfo<string>) {
     return (
       <Pressable onPress={() => onSelectImage(item)}>
@@ -47,17 +47,17 @@ export function NewPostScreen({
   return (
     <PermissionManager
       permissionName="photoLibrary"
-      description="Permita o HelpTomorrow acessar as imagems da sua galeria">
-      <Screen canGoBack title="Novo post" noPaddingHorizontal>
+      description="Permita o Nubble acessar as images da sua galeria">
+      <Screen canGoBack noPaddingHorizontal title="Novo post">
         <FlatList
           ref={flatListRef}
+          numColumns={NUM_COLUMNS}
           data={photoList}
           renderItem={renderItem}
-          numColumns={NUM_COLUMNS}
           onEndReached={fetchNextPage}
           onEndReachedThreshold={0.1}
           ListHeaderComponent={
-            <Header imageUri={selectedImage} imageWidth={SCREEN_WIDTH} />
+            <Header imageWidth={SCREEN_WIDTH} imageUri={selectedImage} />
           }
         />
       </Screen>

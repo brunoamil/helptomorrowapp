@@ -6,9 +6,6 @@ import {PostAPI} from './postTypes';
 async function getList(
   params?: PageParams & {user_id?: number},
 ): Promise<PageAPI<PostAPI>> {
-  //delay
-  // await new Promise(resolve => setTimeout(() => resolve(''), 2000));
-
   const response = await api.get<PageAPI<PostAPI>>('user/post', {
     params,
   });

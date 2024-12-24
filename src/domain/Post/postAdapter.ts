@@ -1,17 +1,17 @@
-import {PostAPI, Post} from './postTypes';
-/**
- * @description Funcao para adaptar para o modelo final
- */
+import {Post, PostAPI} from './postTypes';
 
+/**
+ * @description Adapta o PostAPI para o modelo de Post
+ */
 function toPost(postAPI: PostAPI): Post {
   return {
     id: postAPI.id,
     text: postAPI.text,
     author: {
-      id: postAPI.user.id,
       profileURL: postAPI.user.profile_url,
-      name: postAPI.user.first_name,
+      name: postAPI.user.full_name,
       userName: postAPI.user.username,
+      id: postAPI.user.id,
     },
     imageURL: postAPI.image_url,
     reactionCount: parseInt(postAPI.meta.like_count, 10),
@@ -23,6 +23,5 @@ function toPost(postAPI: PostAPI): Post {
     })),
   };
 }
-export const postAdapter = {
-  toPost,
-};
+
+export const postAdapter = {toPost};
