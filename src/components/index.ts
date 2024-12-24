@@ -13,6 +13,7 @@ export * from './ProfileAvatar/ProfileAvatar';
 export * from './TextMessage/TextMessage';
 export * from './Toast/Toast';
 export * from './ProfileUser/ProfileUser';
+export * from './ProfileTemplate/ProfileTemplate';
 export * from './PermissionManager/PermissionManager';
 export * from './ProgressIndicator/ProgressIndicator';
 export * from './Separator/Separator';
