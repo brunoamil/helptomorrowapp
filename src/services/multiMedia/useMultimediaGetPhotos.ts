@@ -3,16 +3,17 @@ import {useEffect, useState} from 'react';
 import {QueryKeys} from '@infra';
 import {useInfiniteQuery} from '@tanstack/react-query';
 
-import {multiMediaService} from './multiMediaService';
+import {multimediaService} from './multimediaService';
 
 export function useMultimediaGetPhotos(
   hasPermission: boolean,
   onInitialLoad?: (imageUri: string) => void,
 ) {
   const [list, setList] = useState<string[]>([]);
+
   const query = useInfiniteQuery({
     queryKey: [QueryKeys.CameraRollList],
-    queryFn: ({pageParam}) => multiMediaService.getPhotos(pageParam),
+    queryFn: ({pageParam}) => multimediaService.getPhotos(pageParam),
     getNextPageParam: ({cursor}) => cursor,
     enabled: hasPermission,
   });
@@ -22,6 +23,7 @@ export function useMultimediaGetPhotos(
       query.fetchNextPage();
     }
   }
+
   useEffect(() => {
     if (query.data) {
       const newList = query.data.pages.reduce<string[]>((prev, curr) => {
@@ -33,25 +35,7 @@ export function useMultimediaGetPhotos(
         onInitialLoad(newList[0]);
       }
     }
-  }, [query.data, onInitialLoad]);
-
-  //Deprecated
-  // async function getPhotos() {
-  //   const hasPermission = await hasAndroidPermission();
-
-  //   if (hasPermission) {
-  //     const photoPage = await CameraRoll.getPhotos({
-  //       first: 10,
-  //     });
-  //     console.log('photoPage', photoPage.page_info);
-  //     setList(photoPage.edges.map(edge => edge.node.image.uri));
-  //   }
-
-  //   return [];
-  // }
-  // useEffect(() => {
-  //   getPhotos();
-  // }, []);
+  }, [onInitialLoad, query.data]);
 
   return {
     photoList: list,
@@ -59,53 +43,3 @@ export function useMultimediaGetPhotos(
     fetchNextPage,
   };
 }
-
-// async function hasAndroidPermission() {
-//   if (Platform.OS === 'ios') {
-//     return true;
-//   }
-//   const getCheckPermissionPromise = () => {
-//     if (Number(Platform.Version) >= 33) {
-//       return Promise.all([
-//         PermissionsAndroid.check(
-//           PermissionsAndroid.PERMISSIONS.READ_MEDIA_IMAGES,
-//         ),
-//         PermissionsAndroid.check(
-//           PermissionsAndroid.PERMISSIONS.READ_MEDIA_VIDEO,
-//         ),
-//       ]).then(
-//         ([hasReadMediaImagesPermission, hasReadMediaVideoPermission]) =>
-//           hasReadMediaImagesPermission && hasReadMediaVideoPermission,
-//       );
-//     } else {
-//       return PermissionsAndroid.check(
-//         PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-//       );
-//     }
-//   };
-
-//   const hasPermission = await getCheckPermissionPromise();
-//   if (hasPermission) {
-//     return true;
-//   }
-//   const getRequestPermissionPromise = () => {
-//     if (Number(Platform.Version) >= 33) {
-//       return PermissionsAndroid.requestMultiple([
-//         PermissionsAndroid.PERMISSIONS.READ_MEDIA_IMAGES,
-//         PermissionsAndroid.PERMISSIONS.READ_MEDIA_VIDEO,
-//       ]).then(
-//         statuses =>
-//           statuses[PermissionsAndroid.PERMISSIONS.READ_MEDIA_IMAGES] ===
-//             PermissionsAndroid.RESULTS.GRANTED &&
-//           statuses[PermissionsAndroid.PERMISSIONS.READ_MEDIA_VIDEO] ===
-//             PermissionsAndroid.RESULTS.GRANTED,
-//       );
-//     } else {
-//       return PermissionsAndroid.request(
-//         PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-//       ).then(status => status === PermissionsAndroid.RESULTS.GRANTED);
-//     }
-//   };
-
-//   return await getRequestPermissionPromise();
-// }

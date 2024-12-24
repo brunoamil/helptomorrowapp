@@ -1,5 +1,5 @@
 import {MutationOptions, QueryKeys} from '@infra';
-import {ImageForUpload, multiMediaService} from '@services';
+import {ImageForUpload, multimediaService} from '@services';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 
 import {postService} from '../postService';
@@ -34,7 +34,7 @@ export function usePostCreate(options?: MutationOptions<Post>) {
     description: string;
     imageUri: string;
   }) {
-    const imageForUpload = await multiMediaService.prepareImageForUpload(
+    const imageForUpload = await multimediaService.prepareImageForUpload(
       imageUri,
     );
 
