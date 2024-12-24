@@ -2,7 +2,8 @@ import React from 'react';
 import {GestureResponderEvent} from 'react-native';
 
 import {User} from '@domain';
-import {useNavigation} from '@react-navigation/native';
+
+import {useAppNavigation} from '@hooks';
 
 import {PressableBox, Box, PressableBoxProps} from '../Box/Box';
 import {
@@ -23,13 +24,13 @@ export function ProfileUser({
   RightComponent,
   ...pressableBoxProps
 }: ProfileUserProps) {
-  const navigation = useNavigation();
+  const navigate = useAppNavigation();
 
   function handleOnPress(event: GestureResponderEvent) {
     if (onPress) {
       onPress(event);
     }
-    navigation.navigate('ProfileScreen', {userId: user.id});
+    navigate.toProfile(user.id);
   }
   return (
     <PressableBox

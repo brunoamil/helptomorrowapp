@@ -3,9 +3,9 @@ import {Dimensions, Image, ListRenderItemInfo} from 'react-native';
 
 import {PostReaction, postReactionService} from '@domain';
 import {QueryKeys} from '@infra';
-import {useNavigation} from '@react-navigation/native';
 
 import {InfinityScrollList, PressableBox, Screen, Text} from '@components';
+import {useAppNavigation} from '@hooks';
 import {AppTabScreenProps} from '@routes';
 
 const NUM_COLUMNS = 2;
@@ -16,16 +16,15 @@ const ITEM_MARGIN = 16;
 const ITEM_WIDTH = (SCREEN_WIDTH - SCREEN_PADDING * 2) / NUM_COLUMNS;
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function FavoriteScreen(props: AppTabScreenProps<'FavoriteScreen'>) {
-  const navigation = useNavigation();
+  const navigate = useAppNavigation();
 
   function renderItem({item}: ListRenderItemInfo<PostReaction>) {
     return (
       <PressableBox
         onPress={() =>
-          navigation.navigate('PostCommentScreen', {
+          navigate.toPostDetails({
             postId: item.postId,
             postAuthorId: item.author.id,
-            showPost: true,
           })
         }>
         <Image
