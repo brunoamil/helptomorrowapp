@@ -29,6 +29,8 @@ export function ProfileTemplate({userId, isMyProfile}: Props) {
   const {user} = useUserGetById(userId);
   const [pulicationCount, setPublicationCount] = useState(0);
   const navigate = useAppNavigation();
+
+  console.log('user', user);
   function renderItem({item}: ListRenderItemInfo<Post>) {
     return (
       <Pressable
@@ -52,7 +54,7 @@ export function ProfileTemplate({userId, isMyProfile}: Props) {
     }
     return (
       <ProfileHeader
-        user={user}
+        userDetails={user}
         isMyProfile={isMyProfile}
         pulicationCount={pulicationCount.toString()}
       />
