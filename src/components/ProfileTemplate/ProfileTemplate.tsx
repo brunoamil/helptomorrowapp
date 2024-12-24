@@ -1,5 +1,12 @@
 import React from 'react';
-import {FlatList, Image, ListRenderItemInfo} from 'react-native';
+import {
+  Dimensions,
+  FlatList,
+  Image,
+  ListRenderItemInfo,
+  StyleProp,
+  ViewStyle,
+} from 'react-native';
 
 import {Post, usePostList, useUserGetById} from '@domain';
 
@@ -7,6 +14,9 @@ import {Screen} from '../Screen/Screen';
 
 import {ProfileHeader} from './components/ProfileHeader';
 
+const NUM_COLUMNS = 3;
+const SCREEN_WIDTH = Dimensions.get('screen').width;
+const ITEM_WIDTH = SCREEN_WIDTH / NUM_COLUMNS;
 type Props = {
   userId: number;
   isMyProfile?: boolean;
@@ -17,7 +27,10 @@ export function ProfileTemplate({userId, isMyProfile}: Props) {
 
   function renderItem({item}: ListRenderItemInfo<Post>) {
     return (
-      <Image source={{uri: item.imageURL}} style={{width: 100, height: 100}} />
+      <Image
+        source={{uri: item.imageURL}}
+        style={{width: ITEM_WIDTH, height: ITEM_WIDTH}}
+      />
     );
   }
 
@@ -25,15 +38,22 @@ export function ProfileTemplate({userId, isMyProfile}: Props) {
     if (!user) {
       return null;
     }
-    return <ProfileHeader user={user} />;
+    return <ProfileHeader user={user} isMyProfile={isMyProfile} />;
   }
   return (
-    <Screen flex={1} canGoBack={!isMyProfile}>
+    <Screen flex={1} canGoBack={!isMyProfile} style={$screen}>
       <FlatList
         data={list}
         renderItem={renderItem}
+        numColumns={NUM_COLUMNS}
         ListHeaderComponent={renderListHeader}
+        keyExtractor={item => item.id.toString()}
       />
     </Screen>
   );
 }
+
+const $screen: StyleProp<ViewStyle> = {
+  paddingBottom: 0,
+  paddingHorizontal: 0,
+};

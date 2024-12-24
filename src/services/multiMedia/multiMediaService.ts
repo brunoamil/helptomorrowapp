@@ -11,6 +11,7 @@ async function getPhotos(cursor?: string): Promise<PhotoListPaginated> {
     after: cursor,
   });
 
+  console.log('photoPage', photoPage);
   const photoList = photoPage.edges.map(edge => edge.node.image.uri);
 
   return {
