@@ -42,8 +42,8 @@ type ItemType = {
 function Item({label, value}: ItemType) {
   return (
     <Box alignItems="center">
-      <Text preset="headingSmall">{value}</Text>
-      <Text preset="paragraphSmall">{label}</Text>
+      <Text preset="headingSmall">{value ?? value}</Text>
+      <Text preset="paragraphSmall">{label ?? label}</Text>
     </Box>
   );
 }

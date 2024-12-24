@@ -36,8 +36,8 @@ export function ProfileHeader({user, isMyProfile, pulicationCount}: Props) {
           @{user.username}
         </Text>
         <ProfileMetadata
-          followersCount={user.meta.followersCount}
-          followingCount={user.meta.followingCount}
+          followersCount={user.meta?.followersCount}
+          followingCount={user.meta?.followingCount}
           publicationCount={pulicationCount}
         />
         {isMyProfile ? (
