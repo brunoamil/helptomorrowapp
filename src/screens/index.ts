@@ -14,5 +14,8 @@ export * from './app/SearchScreen/SearchScreen';
 export * from './app/ProfileScreen/ProfileScreen';
 export * from './app/PostCommentScreen/PostCommentScreen';
 export * from './app/CameraScreen/CameraScreen';
+export * from './app/EditEmailScreen/EditEmailScreen';
+export * from './app/EditPasswordScreen/EditPasswordScreen';
+export * from './app/EditProfileScreen/EditProfileScreen';
 
 export * from './onboarding/OnboardingScreen/OnboardingScreen';

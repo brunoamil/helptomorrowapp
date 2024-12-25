@@ -21,6 +21,7 @@ module.exports = {
           '@services': './src/services',
           '@test': './src/test',
           '@assets': './src/assets',
+          '@form': './src/form',
         },
       },
     ],
