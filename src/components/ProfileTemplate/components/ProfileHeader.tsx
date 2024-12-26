@@ -34,7 +34,7 @@ export function ProfileHeader({
         />
 
         <Text preset="headingMedium" mt="s16">
-          {userDetails.username}
+          {userDetails.fullName}
         </Text>
         <Text preset="paragraphLarge" mt="s4" color="gray1">
           @{userDetails.username}
