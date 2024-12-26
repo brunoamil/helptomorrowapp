@@ -36,9 +36,15 @@ export type AppStackParamList = {
     imageUri: string;
   };
   CameraScreen: undefined;
-  EditEmailScreen: undefined;
-  EditPasswordScreen: undefined;
-  EditProfileScreen: undefined;
+  EditEmailScreen: {
+    userId: number;
+  };
+  EditPasswordScreen: {
+    userId: number;
+  };
+  EditProfileScreen: {
+    userId: number;
+  };
 };
 
 const Stack = createNativeStackNavigator<AppStackParamList>();

@@ -1,6 +1,7 @@
 import React from 'react';
 
-import {useAuthSignUp} from '@domain';
+import {authService, useAuthSignUp} from '@domain';
+import {useAsyncValidation} from '@form';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useForm} from 'react-hook-form';
 
@@ -16,7 +17,6 @@ import {useResetNavigationSuccess} from '@hooks';
 import {AuthScreenProps, AuthStackParamList} from '@routes';
 
 import {SignUpSchema, signUpSchema} from './signUpSchema';
-import {useAsyncValidation} from './useAsyncValidation';
 
 const resetParams: AuthStackParamList['SuccessScreen'] = {
   title: 'Sua conta foi criada com sucesso!',
@@ -54,9 +54,24 @@ export function SignUpScreen({navigation}: AuthScreenProps<'SignUpScreen'>) {
     signUp(formValues);
   }
 
-  const {userEmailValidation, usernameValidation} = useAsyncValidation({
+  // const {userEmailValidation, usernameValidation} = useAsyncValidation({
+  //   watch,
+  //   getFieldState,
+  // });
+  const usernameValidation = useAsyncValidation({
     watch,
     getFieldState,
+    fieldName: 'username',
+    errorMessage: 'Username indisponível',
+    isAvailableFunc: authService.isUserNameAvailable,
+  });
+
+  const userEmailValidation = useAsyncValidation({
+    watch,
+    getFieldState,
+    fieldName: 'email',
+    errorMessage: 'E-mail indisponível',
+    isAvailableFunc: authService.isEmailAvailable,
   });
 
   return (
@@ -100,6 +115,7 @@ export function SignUpScreen({navigation}: AuthScreenProps<'SignUpScreen'>) {
         label="E-mail"
         placeholder="Digite seu e-mail"
         boxProps={{mb: 's20'}}
+        errorMessage={userEmailValidation.errorMessage}
         RightComponent={
           userEmailValidation.isFetching ? (
             <ActivityIndicator size="small" color="primary" />

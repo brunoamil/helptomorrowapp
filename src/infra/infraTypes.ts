@@ -7,4 +7,5 @@ export enum QueryKeys {
   UserList = 'UserList',
   CameraRollList = 'CameraRollList',
   FavoriteList = 'FavoriteList',
+  AsyncValidation = 'AsyncValidation',
 }
