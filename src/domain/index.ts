@@ -5,3 +5,4 @@ export * from './User';
 export * from './User/userAdapter';
 export * from './User/userTypes';
 export * from './PostReaction';
+export * from './Follow';

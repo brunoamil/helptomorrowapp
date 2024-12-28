@@ -43,6 +43,7 @@ export function ProfileHeader({
           followersCount={userDetails.meta?.followersCount}
           followingCount={userDetails.meta?.followingCount}
           publicationCount={pulicationCount}
+          isMyProfile={isMyProfile}
         />
         {isMyProfile ? (
           <Box position="absolute" alignSelf="flex-end">
