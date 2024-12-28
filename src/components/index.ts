@@ -21,3 +21,4 @@ export * from './RadioButton';
 export * from './InfinityScrollList/InfinityScrollList';
 export * from './BackButton/BackButton';
 export * from './InputButton/InputButton';
+export * from './UserListTemplate/UserListTemplate';

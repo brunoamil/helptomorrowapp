@@ -1,14 +1,15 @@
 import React from 'react';
 
+import {useFollowUser} from '@domain';
 import {useNavigation} from '@react-navigation/native';
 
 import {Button, ButtonProps} from '../../Button/Button';
 
-type ButttonVariant = 'myProfile' | 'isFollowing' | 'isNotFollwing';
+type ButttonVariant = 'myProfile' | 'isFollowing' | 'isNotFollwing' | 'loading';
 
 const buttonVariants: Record<
   ButttonVariant,
-  Pick<ButtonProps, 'title' | 'preset'>
+  Pick<ButtonProps, 'title' | 'preset' | 'loading'>
 > = {
   myProfile: {
     title: 'Editar perfil',
@@ -21,6 +22,11 @@ const buttonVariants: Record<
   isNotFollwing: {
     title: 'Seguir',
     preset: 'outline',
+  },
+  loading: {
+    title: 'Carregando...',
+    preset: 'outline',
+    loading: true,
   },
 };
 
@@ -35,15 +41,22 @@ export function ProfileButton({
   isFollowing,
   userId,
 }: ProfileButtonProps) {
+  const {followUser, isLoading} = useFollowUser();
   const navigation = useNavigation();
-  const variant = getVariant({isFollowing, isMyProfile});
+  const variant = getVariant({isFollowing, isMyProfile, isLoading});
   const buttonPreset = buttonVariants[variant];
 
   function handleOnPress() {
-    if (isMyProfile) {
-      navigation.navigate('EditProfileScreen', {
-        userId,
-      });
+    switch (variant) {
+      case 'isFollowing':
+        break;
+      case 'isNotFollwing':
+        followUser(userId);
+        break;
+      case 'myProfile':
+        navigation.navigate('EditProfileScreen', {
+          userId,
+        });
     }
   }
 
@@ -55,7 +68,13 @@ export function ProfileButton({
 function getVariant({
   isFollowing,
   isMyProfile,
-}: Pick<ProfileButtonProps, 'isFollowing' | 'isMyProfile'>): ButttonVariant {
+  isLoading,
+}: Pick<ProfileButtonProps, 'isFollowing' | 'isMyProfile'> & {
+  isLoading: boolean;
+}): ButttonVariant {
+  if (isLoading) {
+    return 'loading';
+  }
   if (isMyProfile) {
     return 'myProfile';
   }

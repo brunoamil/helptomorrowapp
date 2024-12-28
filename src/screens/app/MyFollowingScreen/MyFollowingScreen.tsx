@@ -1,60 +1,55 @@
-import React, {useState} from 'react';
-import {ListRenderItemInfo} from 'react-native';
+import React from 'react';
 
-import {followService, FollowUser} from '@domain';
+import {followService, useRemoveFollow} from '@domain';
 import {QueryKeys} from '@infra';
+import {useToastService} from '@services';
 
-import {
-  Box,
-  Button,
-  InfinityScrollList,
-  ProfileUser,
-  Screen,
-  Text,
-} from '@components';
+import {UserListTemplate} from '@components';
 import {AppScreenProps} from '@routes';
 export function MyFollowingScreen({}: AppScreenProps<'MyFollowingScreen'>) {
-  const [totaluser, setTotalUser] = useState<number | null>(null);
-  function renderItem({item}: ListRenderItemInfo<FollowUser>) {
-    return (
-      <Box>
-        <ProfileUser
-          user={item}
-          RightComponent={
-            <Button title="Seguindo" preset="gray" onPress={() => {}} />
-          }
-        />
-      </Box>
-    );
-  }
+  const {showToast} = useToastService();
+  const {removeFollow, undoRemoveFollow} = useRemoveFollow({
+    onSuccess: () => {
+      showToast({
+        message: 'Seguidor removido',
+        position: 'bottom',
+        action: {
+          title: 'Desfazer',
+          onPress: () => {
+            undoRemoveFollow();
+          },
+        },
+      });
+    },
+  });
 
-  function renderListHeader() {
-    if (!totaluser) {
-      return null;
-    }
-
-    return (
-      <Text semiBold preset="paragraphSmall" color="primary" mb="s24">
-        {totaluser} seguindo
-      </Text>
-    );
-  }
-
-  async function getList(page: number) {
-    const response = await followService.getMyFollowingList(page);
-    setTotalUser(response.meta.total);
-    return response;
-  }
   return (
-    <Screen flex={1} title="Seguindo" canGoBack>
-      <InfinityScrollList
-        getList={getList}
-        queryKey={[QueryKeys.MyFollowingList]}
-        renderItem={renderItem}
-        flatListProps={{
-          ListHeaderComponent: renderListHeader,
-        }}
-      />
-    </Screen>
+    <UserListTemplate
+      screenTitle="Seguindo"
+      emptyMessage="Você ainda não está seguindo ninguem"
+      totalText="seguindo"
+      queryKey={QueryKeys.MyFollowingList}
+      getUserList={followService.getMyFollowingList}
+      button={{
+        title: 'Seguindo',
+        onPress: followUser =>
+          removeFollow({
+            followId: followUser.followId,
+            userId: followUser.id,
+          }),
+      }}
+    />
   );
+  // return (
+  //   <Screen flex={1} title="Seguindo" canGoBack>
+  //     <InfinityScrollList
+  //       getList={getList}
+  //       queryKey={[QueryKeys.MyFollowingList]}
+  //       renderItem={renderItem}
+  //       flatListProps={{
+  //         ListHeaderComponent: renderListHeader,
+  //       }}
+  //     />
+  //   </Screen>
+  // );
 }

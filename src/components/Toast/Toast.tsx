@@ -57,7 +57,7 @@ export function Toast() {
         opacity: fadeAnim,
         [position]: 100,
       }}>
-      <ToastContent toast={toast} />
+      <ToastContent toast={toast} hideToast={hideToast} />
     </Animated.View>
   );
 }
