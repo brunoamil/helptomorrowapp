@@ -20,7 +20,7 @@ export function MyFollowersScreen({}: AppScreenProps<'MyFollowersScreen'>) {
   return (
     <UserListTemplate
       screenTitle="Seguidores"
-      emptyMessage="Você ainda não está sendo seguido por ninguémkkks"
+      emptyMessage="Você ainda não está sendo seguido por "
       totalText="seguidores"
       queryKey={QueryKeys.MyFollowersList}
       getUserList={followService.getMyFollowersList}
