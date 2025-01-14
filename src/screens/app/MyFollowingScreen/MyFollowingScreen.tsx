@@ -11,7 +11,7 @@ export function MyFollowingScreen({}: AppScreenProps<'MyFollowingScreen'>) {
   const {removeFollow, undoRemoveFollow} = useRemoveFollow({
     onSuccess: () => {
       showToast({
-        message: 'Seguidor removido',
+        message: 'Seguidor removidooo',
         position: 'bottom',
         action: {
           title: 'Desfazer',
