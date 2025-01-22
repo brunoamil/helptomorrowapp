@@ -28,8 +28,8 @@ export function MyFollowingScreen({}: AppScreenProps<'MyFollowingScreen'>) {
       screenTitle="Seguindos"
       emptyMessage="Você ainda não está seguindo clientes "
       totalText="seguindo"
-      queryKey={QueryKeys.MyFollowingList}
-      getUserList={followService.getMyFollowingList}
+      // queryKey={QueryKeys.MyFollowingList}
+      // getUserList={followService.getMyFollowingList}
       button={{
         title: 'Seguindo',
         onPress: followUser =>
