@@ -61,10 +61,3 @@ export const followApi = {
   getMyFollowingList,
   getMyFollowersList,
 };
-export const followApi = {
-  isFollowing,
-  followUser,
-  removeFollow,
-  getMyFollowingList,
-  getMyFollowersList,
-};
