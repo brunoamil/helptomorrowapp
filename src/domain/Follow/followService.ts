@@ -51,19 +51,3 @@ export const followService = {
   followUser,
   removeFollow,
 };
-
-export const followService = {
-  getMyFollowingList,
-  getMyFollowersList,
-  isFollowing,
-  followUser,
-  removeFollow,
-};
-
-export const followService = {
-  getMyFollowingList,
-  getMyFollowersList,
-  isFollowing,
-  followUser,
-  removeFollow,
-};
