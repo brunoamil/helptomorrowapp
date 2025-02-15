@@ -57,3 +57,9 @@ export const postCommentService = {
   remove,
   isAllowToTdelete,
 };
+export const postCommentService = {
+  getList,
+  create,
+  remove,
+  isAllowToTdelete,
+};
