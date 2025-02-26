@@ -29,3 +29,22 @@ export type AppTabScreenProps<
 export type OnboardingScreenProps<
   RouteName extends keyof OnboardingStackParamList,
 > = NativeStackScreenProps<OnboardingStackParamList, RouteName>;
+
+// news types
+
+export type AppScreenProps<RouteName extends keyof AppStackParamList> =
+  NativeStackScreenProps<AppStackParamList, RouteName>;
+
+export type AuthScreenProps<RouteName extends keyof AuthStackParamList> =
+  NativeStackScreenProps<AuthStackParamList, RouteName>;
+
+export type AppTabScreenProps<
+  RouteName extends keyof AppTabBottomTabParamList,
+> = CompositeScreenProps<
+  BottomTabScreenProps<AppTabBottomTabParamList, RouteName>,
+  NativeStackScreenProps<AppStackParamList, 'AppTabNavigator'>
+>;
+
+export type OnboardingScreenProps<
+  RouteName extends keyof OnboardingStackParamList,
+> = NativeStackScreenProps<OnboardingStackParamList, RouteName>;
