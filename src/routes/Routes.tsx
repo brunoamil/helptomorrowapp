@@ -21,6 +21,30 @@ function LoadingScreen() {
   );
 }
 
+function LoadingScreen1() {
+  return (
+    <Box
+      flex={1}
+      backgroundColor="background"
+      justifyContent="center"
+      alignItems="center">
+      <ActivityIndicator size="large" color="primary" />
+    </Box>
+  );
+}
+
+function LoadingScreen2() {
+  return (
+    <Box
+      flex={1}
+      backgroundColor="background"
+      justifyContent="center"
+      alignItems="center">
+      <ActivityIndicator size="large" color="primary" />
+    </Box>
+  );
+}
+
 const stacks: Record<Stacks, React.ReactElement> = {
   Loading: <LoadingScreen />,
   Auth: <AuthStack />,
