@@ -88,6 +88,11 @@ export function CameraScreen({navigation}: AppScreenProps<'CameraScreen'>) {
               <Icon name="cameraClick" color="grayWhite" onPress={takePhoto} />
             )}
           </Box>
+          <Box {...$controlAreaBottom}>
+            {isReady && (
+              <Icon name="cameraClick" color="grayWhite" onPress={takePhoto} />
+            )}
+          </Box>
         </Box>
       </Box>
     </PermissionManager>
