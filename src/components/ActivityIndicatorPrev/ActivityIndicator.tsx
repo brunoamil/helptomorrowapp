@@ -19,5 +19,11 @@ export function ActivityIndicator({color = 'primary', ...rest}: Props) {
       color={colors[color]}
       {...rest}
     />
+    <Box>
+      <RNActivityIndicator
+      testID="activity-indicator"
+      color={colors[color]}
+      {...rest}
+    />
   );
 }
