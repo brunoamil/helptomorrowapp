@@ -46,6 +46,18 @@ export function Screen({
           />
           {children}
         </Box>
+        <Box
+          paddingHorizontal={noPaddingHorizontal ? undefined : 's24'}
+          style={[{paddingTop: top, paddingBottom: bottom}, style]}
+          {...boxProps}>
+          <ScreenHeader
+            paddingHorizontal={noPaddingHorizontal ? 's24' : undefined}
+            HeaderComponent={HeaderComponent}
+            canGoBack={canGoBack}
+            title={title}
+          />
+          {children}
+        </Box>
       </Container>
     </KeyboardAvoidingView>
   );
