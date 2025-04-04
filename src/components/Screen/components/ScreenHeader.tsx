@@ -32,16 +32,5 @@ export function ScreenHeader({
       {title && <Text preset="headingSmall">{title}</Text>}
       {title && <Box width={ICON_SIZE} backgroundColor="carrotSecondary" />}
     </Box>
-    <Box
-    flexDirection="row"
-    alignItems="center"
-    justifyContent="space-between"
-    mb="s24"
-    {...boxProps}>
-    {canGoBack && <BackButton showBackLabel={showBackLabel} />}
-    {HeaderComponent}
-    {title && <Text preset="headingSmall">{title}</Text>}
-    {title && <Box width={ICON_SIZE} backgroundColor="carrotSecondary" />}
-  </Box>
   );
 }
